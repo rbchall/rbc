@@ -1,0 +1,11 @@
+
+### this file is to configure the files which are to be ignored by git commits from being uploaded to git, such as personal info in the db ###
+
+### for virtual env ###
+.env
+.env/
+.venv
+.venv/
+
+### for database ##
+db.sqlite3
