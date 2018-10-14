@@ -4,9 +4,11 @@
 <html amp lang="en">
   <head>
     <meta charset="utf-8">
-    <script async src="https://cdn.ampproject.org/v0.js"></script>
+    <script async src="https://cdn.ampproject.org/v0.js"> </script>
     <title>Rishi Bankim Chnadra Hall|{% block title%}{%endblock title %}</title>
+      <link rel="shortcut icon" href="{{hostel.Hostel_logo.url}}">
     <link rel="canonical" href="http://example.ampproject.org/article-metadata.html">
+    <link rel="stylesheet" href="{% static "css/materialize.min.css" %}">
     <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
     <script type="application/ld+json">
       {
@@ -26,11 +28,16 @@
   <body>
     {% block preloader %}
     {% endblock %}
-
-    <h1>Welcome to the mobile web</h1>
-
+    <nav>
+      <div class="nav-wrapper">
+          <a href="#" class="brand-logo"><amp-img src="{{hostel.Hostel_logo.url}}" alt="{{hostel.Hostel_short}}" height="60" width="60" ></amp-img></a>
+      </div>
+    </nav>
+    <div class="container">
+        <!-- <div class="card-panel light-blue darken-2" align="center"><h5>Rishi Bankim Chandra Hall</h5></div> -->
     {% block body %}
     {% endblock %}
+    </div>
 
   <!-- Latest compiled JavaScript -->
     <script src="{% static "js/materialize.min.js" %}"></script>
