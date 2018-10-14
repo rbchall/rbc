@@ -13,16 +13,20 @@
 <h4>home page</h4>
 {{hostel.Hostel_name}}
 
-<!-- about us -->>
+{% for image in hostel_scroll_img %}
+<amp-img src="{{image.Images_scroll.url}}" alt="{{image.Image_description}}" height="100" width="100" ></amp-img>
+{% endfor %}
+
+<!-- about us -->
 
 
-<!-- events -->>
+<!-- events -->
 
 
-<!-- AAA -->>
+<!-- AAA -->
 
 
-<!-- alfresco_upcomming -->>
+<!-- alfresco_upcomming -->
 
 
 {% endblock %}
