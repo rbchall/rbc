@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8">
     <script async src="https://cdn.ampproject.org/v0.js"> </script>
-    <title>Rishi Bankim Chnadra Hall|{% block title%}{%endblock title %}</title>
+    <title>{% block title%}{%endblock title %}|Rishi Bankim Chnadra Hall</title>
       <link rel="shortcut icon" href="{{hostel.Hostel_logo.url}}">
     <link rel="canonical" href="http://example.ampproject.org/article-metadata.html">
     <link rel="stylesheet" href="{% static "css/materialize.min.css" %}">
@@ -31,6 +31,12 @@
     <nav>
       <div class="nav-wrapper">
           <a href="#" class="brand-logo"><amp-img src="{{hostel.Hostel_logo.url}}" alt="{{hostel.Hostel_short}}" height="60" width="60" ></amp-img></a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li><a href="{% url 'home' %}">Home</a></li>
+        <li><a href="/mess">Mess</a></li>
+        <li><a href="/Net">Net</a></li>
+            <li><a href="/account">Login/Signup</a></li>
+      </ul>
       </div>
     </nav>
     <div class="container">

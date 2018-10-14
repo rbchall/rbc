@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'mess.apps.MessConfig',
     'net.apps.NetConfig',
     'home.apps.HomeConfig',
+    'Account'
 ]
 
 MIDDLEWARE = [
