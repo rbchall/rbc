@@ -37,11 +37,16 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    ####custome apps
     'mess.apps.MessConfig',
     'net.apps.NetConfig',
     'home.apps.HomeConfig',
-    'Account'
+    'Account.apps.AccountConfig',
+    'Profile.apps.ProfileConfig'
 ]
+
+AUTH_USER_MODEL= 'Account.RBCUser'  # changes default usermodel to ours
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

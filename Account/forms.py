@@ -2,19 +2,22 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
-from .models import *
+from .models import RBCUser
 
-class signup(forms.Form):
-    username = forms.CharField(label='username',max_length=50)
-    password = forms.CharField(label='Password', widget=forms.PasswordInput)
-    password2 = forms.CharField(label='Repeat Password', widget=forms.PasswordInput)
+class signup(UserCreationForm):
     class Meta:
         model = User
-        fileds = ['username','first_name','Last_name']
+        fields = [
+            'username',
+            'first_name',
+            'last_name',
+            'password1',
+            'password2',
+        ]
 
     class Meta:
-        model =UserDetails
-        fileds = ['room_number','year']
+        model = RBCUser
+        fields = ['room_number','year','veg']
 
     def clean_password2(self):
         cd = self.cleaned_data
@@ -30,18 +33,24 @@ class signup(forms.Form):
         return username
 
     def save(self, commit=True):
+        user = super(signup, self).save(commit=False )
         user = User.objects.create_user(
             self.cleaned_data['username'],
-            self.cleaned_data['password']
+            self.cleaned_data['password'],
         )
+        if commit:
+             user.save()
+
         return user
 
+"""
 class UserDetailEditForm(forms.ModelForm):
     class Meta:
-        model = UserDetails
-        fields = ('veg','veg_on_egg','veg_on_fish','veg_on_chicken','veg_on_mutton','room_number','year')
+        model = profile
+        fields = ('veg_on_egg','veg_on_fish','veg_on_chicken','veg_on_mutton')
 
 class UserMealstatus(forms.ModelForm):
     class Meta:
-        model = UserDetails
+        model = profile
         fields= ('meal_status',)
+"""
