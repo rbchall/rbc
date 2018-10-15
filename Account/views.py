@@ -23,7 +23,7 @@ def signup(request):
             return redirect('Account/signup')
 
     else:
-        form = signup()
+        form = signup
         context = {'form':form}
     return render(request, 'Account/signup.html',context)
 
