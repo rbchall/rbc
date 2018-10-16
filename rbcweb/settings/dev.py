@@ -43,7 +43,10 @@ INSTALLED_APPS = [
     'net.apps.NetConfig',
     'home.apps.HomeConfig',
     'Account.apps.AccountConfig',
-    'Profile.apps.ProfileConfig'
+    'Profile.apps.ProfileConfig',
+    
+    ### plugins ###
+    'multiselectfield',
 ]
 
 AUTH_USER_MODEL= 'Account.RBCUser'  # changes default usermodel to ours

@@ -3,9 +3,9 @@ from django.core.exceptions import ValidationError
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 from .models import RBCUser
 
-class signup(forms.Form):
+class SignUP(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput)
-    password2 = forms.CharField(label='Confirm password', widget=forms.PasswordInput)
+    password2 = forms.CharField(label='Confirm Password', widget=forms.PasswordInput)
     class Meta:
         model = RBCUser
         fields = [
@@ -38,7 +38,7 @@ class signup(forms.Form):
 
 class UserAdminCreationForm(forms.Form):
     password = forms.CharField(widget=forms.PasswordInput)
-    password2 = forms.CharField(label='Confirm password', widget=forms.PasswordInput)
+    password2 = forms.CharField(label='Confirm Password', widget=forms.PasswordInput)
     class Meta:
         model = RBCUser
         fields = [

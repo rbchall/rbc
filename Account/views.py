@@ -2,15 +2,15 @@ from django.shortcuts import render
 
 # Create your views here.
 
-from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth import login,logout,authenticate
+#from django.contrib.auth.forms import UserCreationForm
+#from django.contrib.auth import login,logout,authenticate
 from django.shortcuts import redirect
 #from .models import *
-from .forms import signup
+from .forms import SignUP
 
 def signup(request):
     if request.method == 'POST':
-        form = signup(request.POST)
+        form = SignUP(request.POST)
         #detailed_form = UserDetailEditForm(request.POST)
         if form.is_valid():
             #user=form.save(commit=False)
@@ -23,9 +23,9 @@ def signup(request):
             return redirect('Account/signup')
 
     else:
-        form = signup
-        context = {'form':form}
-    return render(request, 'Account/signup.html',context)
+        form = SignUP()
+        #context = {'form':form}
+    return render(request, 'Account/signup.html',{'form': form})
 
             #user = authenticate(username=username,password=password)
             #if user is not None:
