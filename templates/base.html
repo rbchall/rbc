@@ -1,3 +1,5 @@
+{% load static %}
+{% load staticfiles %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,12 +13,17 @@
 
 </head>
 <body>
-<div class="container-fluid" >
- <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-   <a class="navbar-brand" href="#">
-    <img src="{{hostel.Hostel_logo.url}}" alt="{{{{hostel.Hostel_short}}}}" style="width:40px;  ">
+<div>
+ <nav class="navbar navbar-expand-sm bg-light navbar-light ">
+   <a class="navbar-brand" href="{% url 'home:index' %}">
+    <img src="{{hostel.Hostel_logo.url}}" alt="{{hostel.Hostel_short}}" style="width:50px;">
   </a>
-     <ul class="navbar-nav">
+     <h4 align="center">Rishi Bankim Chandra Hall</h4>
+     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+         <span class="navbar-toggler-icon"></span>
+     </button>
+     <div class="collapse navbar-collapse" id="collapsibleNavbar">
+     <ul class="navbar-nav ml-auto">
     <li class="nav-item">
       <a class="nav-link" href="{% url 'mess:home' %}">Mess</a>
     </li>
@@ -27,6 +34,7 @@
       <a class="nav-link" href="/admin">Admin</a>
     </li>
   </ul>
+     </div>
 </nav>
 </div>
     {% block body %}
