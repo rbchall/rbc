@@ -4,7 +4,7 @@ from django.db import models
 from django.contrib.auth.models import (
     AbstractBaseUser, BaseUserManager
 )
-from django import forms
+from django.forms import ModelForm
 from multiselectfield import MultiSelectField
 
 YEAR_CHOICES = (
@@ -28,6 +28,10 @@ class RBCUserManager(BaseUserManager):
             raise ValueError("Email not valid")
         if not password:
             raise ValueError("Password error")
+        if not year:
+            raise ValueError("User must have an year")
+        if not room_number:
+            raise ValueError("User must be in a valid room")
         user_obj = self.model(
             email=self.normalize_email(email),
             # username = self.get_by_natural_key(username),
@@ -69,7 +73,6 @@ class RBCUser(AbstractBaseUser):
     username = models.CharField(max_length=50, blank=True, null=True)
     year = models.IntegerField(choices=YEAR_CHOICES, null=True,)
     room_number = models.IntegerField(choices=ROOM_NUMBER, null=True)
-    veg = models.BooleanField(default=False)
     active = models.BooleanField(default=False) # can login
     staff = models.BooleanField(default=False) #staff non admin/super
     admin = models.BooleanField(default=False) #admin/superuser

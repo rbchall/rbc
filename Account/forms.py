@@ -1,11 +1,12 @@
 from django import forms
 from django.core.exceptions import ValidationError
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
-from .models import RBCUser
+from .models import RBCUser, ROOM_NUMBER, YEAR_CHOICES
 
 class SignUP(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput)
     password2 = forms.CharField(label='Confirm Password', widget=forms.PasswordInput)
+    #room_number = forms.ChoiceField(choices=ROOM_NUMBER)
     class Meta:
         model = RBCUser
         fields = [
@@ -13,7 +14,6 @@ class SignUP(forms.ModelForm):
             'email',
             'room_number',
             'year',
-            'veg',
         ]
 
     def clean_password2(self):
@@ -24,19 +24,19 @@ class SignUP(forms.ModelForm):
 
     def clean_username(self):
         username = self.cleaned_data['username'].lower()
-        r = User.objects.filter(username=username)
+        r = self.objects.filter(username=username)
         if r.exists():
             raise ValidationError("Username already exists")
         return username
 
     def clean_email(self):
         email = self.cleaned_data.get('email')
-        qs = User.objects.filter(email=email)
+        qs = self.objects.filter(email=email)
         if qs.exists():
             raise forms.ValidationError("email is taken")
         return email
 
-class UserAdminCreationForm(forms.Form):
+class UserAdminCreationForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput)
     password2 = forms.CharField(label='Confirm Password', widget=forms.PasswordInput)
     class Meta:
@@ -55,7 +55,7 @@ class UserAdminCreationForm(forms.Form):
     def save(self, commit=True):
         # save the provided password in hashed format
         user = super(UserAdminCreationForm, self).save(commit=False)
-        user.set_password(self.cleaned_data["password1"])
+        user.set_password(self.cleaned_data["password"])
         if commit:
             user.save()
         return user

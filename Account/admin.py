@@ -19,10 +19,10 @@ class UserAdmin(BaseUserAdmin):
     # These override the definitions on the base UserAdmin
     # that reference specific fields on auth.User.
     list_display = ('email', 'admin', 'username','year','room_number')
-    list_filter = ('admin','year',)
+    list_filter = ('admin','staff','active','year',)
     fieldsets = (
         (None, {'fields': ('email', 'password')}),
-        ('Personal info', {'fields': ('year','room_number','veg')}),
+        ('Personal info', {'fields': ('year','room_number')}),
         ('Permissions', {'fields': ('admin','staff','active')}),
     )
     # add_fieldsets is not a standard ModelAdmin attribute. UserAdmin
@@ -30,7 +30,7 @@ class UserAdmin(BaseUserAdmin):
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('email', 'password1', 'password2')}
+            'fields': ('email', 'password', 'password2')}
         ),
     )
     search_fields = ('email','username')
@@ -39,14 +39,3 @@ class UserAdmin(BaseUserAdmin):
 
 
 admin.site.register(User, UserAdmin)
-
-"""
-class RBCUserAdmin(admin.ModelAdmin):
-    search_fields = ['email','username','room_number','year']
-    list_display = ['email','username','room_number','year']
-    class Meta:
-        model = RBCUser
-
-admin.site.register(User, RBCUserAdmin)
-#admin.site.register(RBCUser)
-"""

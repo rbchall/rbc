@@ -1,10 +1,15 @@
-document.addEventListener('DOMContentLoaded', function() {
-    var elems = document.querySelectorAll('select');
-    var instances = M.FormSelect.init(elems, options);
-  });
-
-  // Or with jQuery
-
-  $(document).ready(function(){
-    $('select').formSelect();
-  });
+$(document).ready(function()
+{$('select').formSelect();
+$('input[type=checkbox]').each(function() {
+        if(this.nextSibling.nodeName != 'label') {
+          $(this).after('<label for="'+this.id+'"></label>')
+        }
+      })
+});
+$(document).ready(function() {
+  $('input[type=checkbox]').each(function() {
+    if(this.nextSibling.nodeName != 'label') {
+      $(this).after('<label for="'+this.id+'"></label>')
+    }
+  })
+})
