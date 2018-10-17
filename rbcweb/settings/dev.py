@@ -37,10 +37,19 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    ####custome apps
     'mess.apps.MessConfig',
     'net.apps.NetConfig',
     'home.apps.HomeConfig',
+    'Account.apps.AccountConfig',
+    'Profile.apps.ProfileConfig',
+    
+    ### plugins ###
+    'multiselectfield',
 ]
+
+AUTH_USER_MODEL= 'Account.RBCUser'  # changes default usermodel to ours
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -57,7 +66,7 @@ ROOT_URLCONF = 'rbcweb.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['templates'],
+        'DIRS': ['','templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

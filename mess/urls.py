@@ -4,4 +4,6 @@ from . import views
 
 app_name = 'mess'
 
-url
+urlpatterns=[
+    path('', views.home, name='home')
+]
