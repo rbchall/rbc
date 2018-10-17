@@ -3,9 +3,23 @@
 
 ### for virtual env ###
 .env
-.env/
 .venv
-.venv/
+env/
+venv/
+ven/
+ENV/
+env.bak/
+venv.bak/
 
 ### for database ##
-db.sqlite3
+*.sqlite3
+
+
+### for media ###
+media/*
+
+### for python compile files###
+*.pyc
+
+.idea
+datadump.json

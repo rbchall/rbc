@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block title %}
+    Home
+{% endblock %}
+
+{% block preloader %}
+
+{% endblock %}
+
+{% block body %}
+<h4>home page</h4>
+{{hostel.Hostel_name}}
+
+{% for image in hostel_scroll_img %}
+<amp-img src="{{image.Images_scroll.url}}" alt="{{image.Image_description}}" height="100" width="100" ></amp-img>
+{% endfor %}
+
+<!-- about us -->
+
+
+<!-- events -->
+
+
+<!-- AAA -->
+
+
+<!-- alfresco_upcomming -->
+
+
+{% endblock %}

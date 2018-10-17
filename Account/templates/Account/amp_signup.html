@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% load static %}
+{% load staticfiles %}
+
+{% block title%}
+Signup
+{%endblock%}
+
+{% block preloader %}
+<script async custom-element="amp-form" src="https://cdn.ampproject.org/v0/amp-form-0.1.js"></script>
+<!-- <link rel="stylesheet" type="text/css" href="{% static "admin/css/base.css" %}">
+<link rel="stylesheet" type="text/css" href="{% static "admin/css/forms.css" %}">
+
+<script src="{% static "js/custome.js" %}"></script>
+<script type="text/javascript" src="{% static "/admin/jsi18n" %}"></script>
+<script type="text/javascript" src="{% static "admin/js/vendor/jquery/jquery.js" %}"></script>
+<script type="text/javascript" src="{% static "admin/js/jquery.init.js" %}"></script>
+<script type="text/javascript" src="{% static "admin/js/core.js" %}"></script>
+<script type="text/javascript" src="{% static "admin/js/admin/RelatedObjectLookups.js" %}"></script>
+<script type="text/javascript" src="{% static "admin/js/actions.js" %}"></script>
+<script type="text/javascript" src="{% static "admin/js/urlify.js" %}"></script>
+<script type="text/javascript" src="{% static "admin/js/prepopulate.js" %}"></script>
+<script type="text/javascript" src="{% static "admin/js/vendor/xregexp/xregexp.js" %}"></script> -->
+{% endblock %}
+
+{% block body %}
+<div >
+    {% if messages %}
+            <ul>
+                {% for message in messages %}
+                <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    <h3>Create RBCian Account</h3>
+
+    <amp-form method="post" target="_top" action="Account/signup/">
+             <fieldset>
+             {% csrf_token %}
+             <table>
+                 {{ form.as_table}}
+                 <tr>
+                     <td></td>
+                     <td>
+                     <button class="btn waves-effect waves-light" type="submit" name="action" value="signup">Submit
+                        <i class="material-icons right">cloud</i>
+                     </button></td>
+                 </tr>
+                 </table>
+             </fieldset>
+             <div submit-success>
+                 <template type="amp-mustache"> successful!
+                 </template>
+             </div>
+             <div submit-error>
+                 <template type="amp-mustache">
+                      failed!
+                 </template>
+             </div>
+         </amp-form>
+</div>
+
+{% endblock %}
+
+{% block script %}
+
+{% endblock %}

@@ -1,0 +1,57 @@
+{% load static %}
+{% load staticfiles %}
+<!doctype html>
+<html amp lang="en">
+  <head>
+    <meta charset="utf-8">
+    <script async src="https://cdn.ampproject.org/v0.js"> </script>
+    <title>{% block title%}{%endblock title %}|Rishi Bankim Chnadra Hall</title>
+      <link rel="shortcut icon" href="{{hostel.Hostel_logo.url}}">
+    <link rel="canonical" href="http://example.ampproject.org/article-metadata.html">
+    <link rel="stylesheet" href="{% static "css/materialize.css" %}">
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+    <script src="{% static "js/jquery-2.1.1.min.js" %}"></script>
+    <script src="{% static "js/custome.js" %}"></script>
+    <script type="application/ld+json">
+      {
+        "@context": "http://schema.org",
+        "@type": "NewsArticle",
+        "headline": "Open-source framework for publishing content",
+        "datePublished": "2015-10-07T12:02:41Z",
+        "image": [
+          "logo.jpg"
+        ]
+      }
+    </script>
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+     {%block style%}
+     {%endblock %}
+  </head>
+  <body>
+    {% block preloader %}
+    {% endblock %}
+    <nav>
+      <div class="nav-wrapper">
+          <a href="#" class="brand-logo"><amp-img src="{{hostel.Hostel_logo.url}}" alt="{{hostel.Hostel_short}}" height="60" width="60" ></amp-img></a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li><a href="{% url 'home:index' %}">Home</a></li>
+        <li><a href="{% url 'mess:home' %}">Mess</a></li>
+        <li><a href="{/net}">Net</a></li>
+            <li><a href="{% url 'Account:signup' %}">Login/Signup</a></li>
+            <li><a href="/admin">Admin</a></li>
+      </ul>
+      </div>
+    </nav>
+    <div class="container">
+        <!-- <div class="card-panel light-blue darken-2" align="center"><h5>Rishi Bankim Chandra Hall</h5></div> -->
+    {% block body %}
+    {% endblock %}
+    </div>
+
+  <!-- Latest compiled JavaScript -->
+    <script src="{% static "js/materialize.min.js" %}"></script>
+    {% block script %}
+
+    {% endblock %}
+  </body>
+</html>
