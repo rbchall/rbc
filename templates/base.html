@@ -1,0 +1,52 @@
+{% load static %}
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title%}{%endblock title %}|Rishi Bankim Chnadra Hall</title>
+    <link rel="stylesheet" href="{% static "css/bootstrap.min.css" %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    {%block style%}
+    {%endblock %}
+
+</head>
+<body>
+<div>
+ <nav class="navbar navbar-expand-sm bg-light navbar-light ">
+   <a class="navbar-brand" href="{% url 'home:index' %}">
+    <img src="{{hostel.Hostel_logo.url}}" alt="{{hostel.Hostel_short}}" style="width:50px;">
+  </a>
+     <h4 align="center">Rishi Bankim Chandra Hall</h4>
+     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+         <span class="navbar-toggler-icon"></span>
+     </button>
+     <div class="collapse navbar-collapse" id="collapsibleNavbar">
+     <ul class="navbar-nav ml-auto">
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'mess:home' %}">Mess</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'Account:signup' %}">Login</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="/admin">Admin</a>
+    </li>
+  </ul>
+     </div>
+</nav>
+</div>
+    {% block body %}
+    {% endblock %}
+
+     <!-- Latest compiled JavaScript -->
+    <script src="{% static "js/bootstrap.min.js"%}"></script>
+    <script src="{% static "js/jquery.min.js"%}"></script>
+    <script src="{% static "js/popper.min.js"%}"></script>
+    <script src="{% static "js/bootstrap.min.js"%}"></script>
+    {% block script %}
+
+    {% endblock %}
+</body>
+</html>
