@@ -2,9 +2,43 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>$Title$</title>
+    <title>{% block title%}{%endblock title %}|Rishi Bankim Chnadra Hall</title>
+    <link rel="stylesheet" href="{% static "css/bootstrap.min.css" %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    {%block style%}
+    {%endblock %}
+
 </head>
 <body>
-$END$
+<div class="container-fluid" >
+ <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+   <a class="navbar-brand" href="#">
+    <img src="{{hostel.Hostel_logo.url}}" alt="{{{{hostel.Hostel_short}}}}" style="width:40px;  ">
+  </a>
+     <ul class="navbar-nav">
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'mess:home' %}">Mess</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'Account:signup' %}">Login</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="/admin">Admin</a>
+    </li>
+  </ul>
+</nav>
+</div>
+    {% block body %}
+    {% endblock %}
+
+     <!-- Latest compiled JavaScript -->
+    <script src="{% static "js/bootstrap.min.js"%}"></script>
+    <script src="{% static "js/jquery.min.js"%}"></script>
+    <script src="{% static "js/popper.min.js"%}"></script>
+    <script src="{% static "js/bootstrap.min.js"%}"></script>
+    {% block script %}
+
+    {% endblock %}
 </body>
 </html>
