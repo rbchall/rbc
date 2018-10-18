@@ -23,9 +23,9 @@ ROOM_NUMBER = (
 
 ## custome usermanager
 class RBCUserManager(BaseUserManager):
-    def create_user(self, email, username, password=None, year='', room_number='', is_staff=False, is_active=False, is_admin=False):
-        if not email:
-            raise ValueError("Email not valid")
+    def create_user(self, username, password=None, year='', room_number='', first_name='', middle_name='', last_name='', is_staff=False, is_active=False, is_admin=False):
+        #if not email:
+            #raise ValueError("Email not valid")
         if not password:
             raise ValueError("Password error")
         if not year:
@@ -33,11 +33,14 @@ class RBCUserManager(BaseUserManager):
         if not room_number:
             raise ValueError("User must be in a valid room")
         user_obj = self.model(
-            email=self.normalize_email(email),
             # username = self.get_by_natural_key(username),
+            #email = email,
             username=username,
             year = year,
             room_number=room_number,
+            first_name=first_name,
+            middle_name=middle_name,
+            last_name=last_name,
         )
         user_obj.set_password(password)
         user_obj.staff = is_staff
@@ -46,19 +49,19 @@ class RBCUserManager(BaseUserManager):
         user_obj.save(using=self._db)
         return user_obj
 
-    def create_staff(self, email, username, password=None):
+    def create_staff(self, username, password=None):
         user = self.create_user(
-            email,
             username,
+            #email,
             password=password,
             is_staff=True
         )
         return user
 
-    def create_superuser(self, email, username, password):
+    def create_superuser(self, username, password):
         user = self.create_user(
-            email,
             username,
+            #email,
             password=password,
             is_active=True,
             is_admin=True,
@@ -69,28 +72,30 @@ class RBCUserManager(BaseUserManager):
 
 ## ## custome usermodel
 class RBCUser(AbstractBaseUser):
-    email = models.EmailField(max_length=255, blank=False, null=False, unique=True)
-    username = models.CharField(max_length=50, blank=True, null=True)
+    username = models.CharField(max_length=50, blank=True, null=True, unique=True)
+    first_name = models.CharField(max_length=50, blank=False, null=False)
+    middle_name = models.CharField(max_length=50, blank=True, null=True)
+    last_name = models.CharField(max_length=50, blank=True, null=True)
     year = models.IntegerField(choices=YEAR_CHOICES, null=True,)
     room_number = models.IntegerField(choices=ROOM_NUMBER, null=True)
     active = models.BooleanField(default=False) # can login
     staff = models.BooleanField(default=False) #staff non admin/super
     admin = models.BooleanField(default=False) #admin/superuser
 
-    USERNAME_FIELD = 'email'
+    USERNAME_FIELD = 'username'
     # email and password are required
-    REQUIRED_FIELDS = ['username','year','room_number',]
+    REQUIRED_FIELDS = ['first_name','middle_name','last_name','year','room_number',]
     # custom user manager
     objects = RBCUserManager()
 
     def __str__(self):
-        return self.email
+        return self.username
 
     def get_username(self):
         return self.username
 
-    def get_email(self):
-        return self.email
+    #def get_email(self):
+        #return self.email
 
     def has_perm(self, perm, obj=None):
         "Does the user have a specific permission?"

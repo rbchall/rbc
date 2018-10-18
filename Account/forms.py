@@ -1,9 +1,16 @@
 from django import forms
 from django.core.exceptions import ValidationError
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
-from .models import RBCUser, ROOM_NUMBER, YEAR_CHOICES
+from .models import RBCUser# ROOM_NUMBER, YEAR_CHOICES
+from django.contrib.auth import (
+    authenticate,
+    get_user_model,
+    login,
+    logout,
+)
+User = get_user_model()
 
-class SignUP(forms.ModelForm):
+class SignUP_form(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput)
     password2 = forms.CharField(label='Confirm Password', widget=forms.PasswordInput)
     #room_number = forms.ChoiceField(choices=ROOM_NUMBER)
@@ -11,30 +18,33 @@ class SignUP(forms.ModelForm):
         model = RBCUser
         fields = [
             'username',
-            'email',
+            'first_name',
+            'middle_name',
+            'last_name',
+            #'email',
             'room_number',
             'year',
         ]
 
     def clean_password2(self):
         cd = self.cleaned_data
-        if cd['passsword'] != cd['password2']:
+        if cd['password'] != cd['password2']:
             raise forms.ValidationError("Password do not match")
         return cd['password2']
 
     def clean_username(self):
         username = self.cleaned_data['username'].lower()
-        r = self.objects.filter(username=username)
+        r = RBCUser.objects.filter(username=username)
         if r.exists():
             raise ValidationError("Username already exists")
         return username
 
-    def clean_email(self):
-        email = self.cleaned_data.get('email')
-        qs = self.objects.filter(email=email)
-        if qs.exists():
-            raise forms.ValidationError("email is taken")
-        return email
+    #def clean_email(self):
+     #   email = self.cleaned_data.get('email')
+      #  qs = RBCUser.objects.filter(email=email)
+       # if qs.exists():
+        #    raise forms.ValidationError("email is taken")
+        #return email
 
 class UserAdminCreationForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput)
@@ -43,12 +53,12 @@ class UserAdminCreationForm(forms.ModelForm):
         model = RBCUser
         fields = [
             'username',
-            'email',
+         #   'email',
         ]
 
     def clean_password2(self):
         cd = self.cleaned_data
-        if cd['passsword'] != cd['password2']:
+        if cd['password'] != cd['password2']:
             raise forms.ValidationError("Password do not match")
         return cd['password2']
 
@@ -69,7 +79,7 @@ class UserAdminChangeForm(forms.ModelForm):
 
     class Meta:
         model = RBCUser
-        fields = ('email', 'password', 'active', 'admin')
+        fields = ('username', 'password', 'active', 'admin',)
 
     def clean_password(self):
         # Regardless of what the user provides, return the initial value.
@@ -77,26 +87,13 @@ class UserAdminChangeForm(forms.ModelForm):
         # field does not have access to the initial value
         return self.initial["password"]
 
+class Login_form(forms.Form):
+    username = forms.CharField()
+    password = forms.CharField(widget=forms.PasswordInput)
 
-"""
-    def save(self, commit=True):
-        user = super(signup, self).save(commit=False )
-        user = User.objects.create_user(
-            self.cleaned_data['username'],
-            self.cleaned_data['password'],
-        )
-        if commit:
-             user.save()
-
-        return user
-
-class UserDetailEditForm(forms.ModelForm):
     class Meta:
-        model = profile
-        fields = ('veg_on_egg','veg_on_fish','veg_on_chicken','veg_on_mutton')
-
-class UserMealstatus(forms.ModelForm):
-    class Meta:
-        model = profile
-        fields= ('meal_status',)
-"""
+        model = RBCUser
+        fields = [
+            'username',
+            'password',
+        ]

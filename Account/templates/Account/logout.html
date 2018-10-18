@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load static %}
+{% load staticfiles %}
+
+{% block title%}
+{{title}}
+{%endblock%}
+
+{% block preloader %}
+
+{% endblock %}
+
+{% block body %}
+<div class="container" >
+    {% if messages %}
+            <ul>
+                {% for message in messages %}
+                <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+<h3>{{logout_text}}</h3>
+
+</div>
+
+{% endblock %}
+
+{% block script %}
+
+{% endblock %}

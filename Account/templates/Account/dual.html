@@ -9,12 +9,7 @@
 {% block preloader %}
 
 {% endblock %}
-{% block nav%}
 
-    <li class="nav-item">
-      <a class="nav-link" href="{% url 'Account:login' %}">Login</a>
-    </li>
-{% endblock %}
 {% block body %}
 <div class="container" >
     {% if messages %}
@@ -25,14 +20,24 @@
             </ul>
         {% endif %}
     <h3>{{title}} to RBCian Account</h3>
-    {% if error %}
-        {{ error }}
-    {% endif %}
 
-    <form method='POST'>
+    <form method='POST' action="{% url 'home:signup' %}">
         {% csrf_token %}
         <table>
-            {{ form.as_table}}
+            {{ form_signup.as_table}}
+            <tr>
+                <td></td>
+                <td>
+                    <button type='submit' class="btn btn-primary">Submit</button>
+                </td>
+            </tr>
+        </table>
+        <form>
+
+            <form method='POST' action="{% url 'home:login' %}">
+        {% csrf_token %}
+        <table>
+            {{ form_login.as_table}}
             <tr>
                 <td></td>
                 <td>
