@@ -4,7 +4,6 @@ from django.shortcuts import render, HttpResponse, HttpResponseRedirect
 
 from django.shortcuts import redirect
 from .forms import SignUP_form,Login_form
-from .models import RBCUser
 from home.models import Hostel
 from django.shortcuts import get_object_or_404
 from django.contrib import messages
@@ -15,7 +14,7 @@ from django.contrib.auth import (
     logout,
 )
 
-user = get_user_model()
+User = get_user_model()
 
 def signup_view(request):
     title = "Signin"
@@ -26,9 +25,14 @@ def signup_view(request):
     }
     if request.method == 'POST':
         form = SignUP_form(request.POST)
+        print(request.POST)
         if form.is_valid():
-            form.save()
-            print(request.POST)
+            user= form.save(commit=False)
+            user.active=True
+            user.staff=False
+            user.admin=False
+            user.authenticated=False
+            user.save()
             messages.success(request, 'Account created successfully')
             form = SignUP_form()
             return redirect('/login')
@@ -51,15 +55,13 @@ def login_view(request):
         if form.is_valid():
             username = form.cleaned_data.get("username")
             password = form.cleaned_data.get("password")
-            print(username, password)
             user = authenticate(username=username, password=password)
-            print(user)
             if user:
-                if user.is_active:
+                if user.authenticated:
                     login(request, user)
                     return HttpResponseRedirect('/')
                 else:
-                    return HttpResponse("Your Rango account is disabled.")
+                    return HttpResponse("Your account is NOT authenticated.")
             else:
                 return HttpResponse("Invalid login details supplied.")
     else:

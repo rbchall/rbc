@@ -23,7 +23,7 @@ ROOM_NUMBER = (
 
 ## custome usermanager
 class RBCUserManager(BaseUserManager):
-    def create_user(self, username, password=None, year='', room_number='', first_name='', middle_name='', last_name='', is_staff=False, is_active=False, is_admin=False):
+    def create_user(self, username, password=None, year='', room_number='', first_name='', middle_name='', last_name='', is_staff=False, is_active=False, is_admin=False, is_authenticated=False):
         #if not email:
             #raise ValueError("Email not valid")
         if not password:
@@ -46,6 +46,7 @@ class RBCUserManager(BaseUserManager):
         user_obj.staff = is_staff
         user_obj.admin = is_admin
         user_obj.active = is_active
+        user_obj.authenticated = is_authenticated
         user_obj.save(using=self._db)
         return user_obj
 
@@ -66,6 +67,7 @@ class RBCUserManager(BaseUserManager):
             is_active=True,
             is_admin=True,
             is_staff=True,
+            is_authenticated = True,
         )
         return user
 
@@ -81,6 +83,7 @@ class RBCUser(AbstractBaseUser):
     active = models.BooleanField(default=False) # can login
     staff = models.BooleanField(default=False) #staff non admin/super
     admin = models.BooleanField(default=False) #admin/superuser
+    authenticated = models.BooleanField(default=False) # for authentication
 
     USERNAME_FIELD = 'username'
     # email and password are required
@@ -118,3 +121,7 @@ class RBCUser(AbstractBaseUser):
     @property
     def is_active(self):
         return self.active
+
+    @property
+    def is_authenticated(self):
+        return self.authenticated

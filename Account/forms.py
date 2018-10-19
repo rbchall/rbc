@@ -39,6 +39,14 @@ class SignUP_form(forms.ModelForm):
             raise ValidationError("Username already exists")
         return username
 
+    def save(self, commit=True):
+        user = super(SignUP_form, self).save(commit=False)
+        user.set_password(self.cleaned_data["password2"])
+        if commit:
+            user.save()
+
+        return user
+
     #def clean_email(self):
      #   email = self.cleaned_data.get('email')
       #  qs = RBCUser.objects.filter(email=email)
@@ -79,7 +87,7 @@ class UserAdminChangeForm(forms.ModelForm):
 
     class Meta:
         model = RBCUser
-        fields = ('username', 'password', 'active', 'admin',)
+        fields = ('username', 'password', 'active', 'admin', 'authenticated')
 
     def clean_password(self):
         # Regardless of what the user provides, return the initial value.

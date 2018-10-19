@@ -48,7 +48,7 @@ class UserChangeForm(forms.ModelForm):
 
     class Meta:
         model = RBCUser
-        fields = ('username', 'password', 'active', 'admin')
+        fields = ('username', 'password', 'active', 'admin', 'authenticated')
 
     def clean_password(self):
         # Regardless of what the user provides, return the initial value.
@@ -66,12 +66,12 @@ class UserAdmin(BaseUserAdmin):
     # The fields to be used in displaying the User model.
     # These override the definitions on the base UserAdmin
     # that reference specific fields on auth.User.
-    list_display = ('username','admin','staff','active','year','room_number')
+    list_display = ('username','admin','staff','active','authenticated','year','room_number')
     list_filter = ('admin','staff','active','year',)
     fieldsets = (
         (None, {'fields': ('username', 'password')}),
         ('Personal info', {'fields': ('first_name','last_name','middle_name','year','room_number')}),
-        ('Permissions', {'fields': ('admin','staff','active')}),
+        ('Permissions', {'fields': ('admin','staff','active','authenticated')}),
     )
     # add_fieldsets is not a standard ModelAdmin attribute. UserAdmin
     # overrides get_fieldsets to use this attribute when creating a user.
