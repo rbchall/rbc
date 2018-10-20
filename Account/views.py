@@ -14,6 +14,7 @@ from django.contrib.auth import (
     logout,
 )
 
+
 User = get_user_model()
 
 def signup_view(request):
@@ -25,7 +26,6 @@ def signup_view(request):
     }
     if request.method == 'POST':
         form = SignUP_form(request.POST)
-        print(request.POST)
         if form.is_valid():
             user= form.save(commit=False)
             user.active=True
@@ -91,3 +91,4 @@ def dual(request):
         'form_signup': form1,
     }
     return render(request, 'Account/dual.html', context)
+

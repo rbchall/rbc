@@ -23,11 +23,11 @@ class Hostel(models.Model):
     Google_Plus =models.URLField(help_text="google+ default url:- https://plus.google.com/u/5/", default="https://plus.google.com/u/5/")
     Youtube = models.URLField(help_text="youtube channel default:-https://www.youtube.com/channel/UC3JOr-Opub8GRKwJjktqZtA", default="https://www.youtube.com/channel/UC3JOr-Opub8GRKwJjktqZtA")
 
-    # def __str__(self):
-    #    return "{}".format(self.id,self.Hostel_name)
+    def __str__(self):
+        return "{}".format(self.Hostel_name)
 
 
-class Hostel_img_scroll(models.Model):
+class HostelImgScroll(models.Model):
     Image_description = models.CharField(max_length=100)
     image_height = models.IntegerField(null=True, blank=True, editable=False, default="300", help_text='300')
     image_width = models.IntegerField(null=True, blank=True, editable=False, default="700", help_text='700')
@@ -35,8 +35,10 @@ class Hostel_img_scroll(models.Model):
                                       height_field='image_height')
     Image_comment = models.CharField(max_length=100, default="KGEC")
     Image_priority = models.IntegerField(default=0)
+    #def __str__(self):
+    #    return "{}".format(self.Image_comment)
 
-class image_upload(models.Model):
+class ImageUpload(models.Model):
     image= models.ImageField(upload_to='Hostel/Images/')
     image_description= models.CharField(max_length=100)
     image_slug= models.CharField(max_length=10, null=False, blank=False, default="R.B.C Hall", help_text="slug to identify image for seo, keep different")

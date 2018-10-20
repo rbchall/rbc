@@ -105,3 +105,35 @@ class Login_form(forms.Form):
             'username',
             'password',
         ]
+
+class UserChangeForm(forms.ModelForm):
+    """A form for updating users. Includes all the fields on
+    the user, but replaces the password field with admin's
+    password hash display field.
+    """
+    password = ReadOnlyPasswordHashField()
+
+    class Meta:
+        model = RBCUser
+        fields = ('username', 'password', 'room_number', 'year')
+
+    def clean_password(self):
+        # Regardless of what the user provides, return the initial value.
+        # This is done here, rather than on the field, because the
+        # field does not have access to the initial value
+        return self.initial["password"]
+
+    def clean_username(self):
+        username = self.cleaned_data['username'].lower()
+        r = RBCUser.objects.filter(username=username)
+        if r.exists():
+            raise ValidationError("Username already exists")
+        return username
+
+    #def save(self, commit=True):
+        #user = super(SignUP_form, self).save(commit=False)
+        #user.set_password(self.cleaned_data["password"])
+        #if commit:
+            #user.save()
+
+        #return user

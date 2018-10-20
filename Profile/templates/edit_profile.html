@@ -10,24 +10,23 @@
 
 {% endblock %}
 {% block nav%}
-    <li class="nav-item">
-      <a class="nav-link" href="{% url 'home:logout' %}">logout</a>
-    </li>
+
 {% endblock %}
 {% block body %}
-<div class="container" >
-    {% if messages %}
-            <ul>
-                {% for message in messages %}
-                <li>{{ message }}</li>
-                {% endfor %}
-            </ul>
-        {% endif %}
-    <h3>{{title}} to RBCian Account</h3>
-    {% if error %}
-        {{ error }}
-    {% endif %}
 
+<div class="container">
+    <h2>Profile</h2>
+    <br>
+    <p>user: {{user}}</p>
+    <p>First Name: {{user.first_name}}</p>
+    <p>Last Name: {{user.last_name}}</p>
+    <p>Room Number:{{user.room_number}}</p>
+    <p>Year: {{user.year}}</p>
+
+</div>
+
+<div class="container">
+    <h2>edit profile</h2>
     <form method='POST'>
         {% csrf_token %}
         <table>
@@ -41,6 +40,7 @@
         </table>
         <form>
 </div>
+
 
 {% endblock %}
 

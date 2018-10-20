@@ -6,6 +6,11 @@ from django.contrib.auth.models import (
 )
 from django.forms import ModelForm
 from multiselectfield import MultiSelectField
+from django.db.models.signals import post_save
+from Profile.models import create_profile
+from django.conf import settings
+from django.utils.translation import ugettext_lazy as _
+from time import timezone
 
 YEAR_CHOICES = (
     (2, '2nd'),
@@ -23,9 +28,12 @@ ROOM_NUMBER = (
 
 ## custome usermanager
 class RBCUserManager(BaseUserManager):
-    def create_user(self, username, password=None, year='', room_number='', first_name='', middle_name='', last_name='', is_staff=False, is_active=False, is_admin=False, is_authenticated=False):
+    use_in_migrations = True
+
+    def create_user(self, username, password=None, year='', room_number='', first_name='', middle_name='', last_name='', is_staff=False, is_active=False, is_admin=False, is_authenticated=False, **extra_fields):
         #if not email:
             #raise ValueError("Email not valid")
+        now = timezone.now()
         if not password:
             raise ValueError("Password error")
         if not year:
@@ -41,6 +49,9 @@ class RBCUserManager(BaseUserManager):
             first_name=first_name,
             middle_name=middle_name,
             last_name=last_name,
+            last_login=now,
+            date_joined=now,
+            **extra_fields,
         )
         user_obj.set_password(password)
         user_obj.staff = is_staff
@@ -50,16 +61,17 @@ class RBCUserManager(BaseUserManager):
         user_obj.save(using=self._db)
         return user_obj
 
-    def create_staff(self, username, password=None):
+    def create_staff(self, username, password=None, **extra_fields):
         user = self.create_user(
             username,
             #email,
             password=password,
-            is_staff=True
+            is_staff=True,
+            **extra_fields,
         )
         return user
 
-    def create_superuser(self, username, password):
+    def create_superuser(self, username, password, **extra_fields):
         user = self.create_user(
             username,
             #email,
@@ -68,22 +80,25 @@ class RBCUserManager(BaseUserManager):
             is_admin=True,
             is_staff=True,
             is_authenticated = True,
+            **extra_fields,
         )
         return user
 
 
 ## ## custome usermodel
 class RBCUser(AbstractBaseUser):
-    username = models.CharField(max_length=50, blank=True, null=True, unique=True)
-    first_name = models.CharField(max_length=50, blank=False, null=False)
-    middle_name = models.CharField(max_length=50, blank=True, null=True)
-    last_name = models.CharField(max_length=50, blank=True, null=True)
-    year = models.IntegerField(choices=YEAR_CHOICES, null=True,)
-    room_number = models.IntegerField(choices=ROOM_NUMBER, null=True)
-    active = models.BooleanField(default=False) # can login
-    staff = models.BooleanField(default=False) #staff non admin/super
-    admin = models.BooleanField(default=False) #admin/superuser
-    authenticated = models.BooleanField(default=False) # for authentication
+    #now = timezone.now()
+    username = models.CharField(_('username'),max_length=50, blank=True, null=True, unique=True)
+    first_name = models.CharField(_('first_name'),max_length=50, blank=False, null=False)
+    middle_name = models.CharField(_('middle_name'),max_length=50, blank=True, null=True)
+    last_name = models.CharField(_('last_name'),max_length=50, blank=True, null=True)
+    year = models.IntegerField(_('year'),choices=YEAR_CHOICES, null=True,)
+    room_number = models.IntegerField(_('room_number'),choices=ROOM_NUMBER, null=True)
+    active = models.BooleanField(_('active'),default=False) # can login
+    staff = models.BooleanField(_('staff'),default=False) #staff non admin/super
+    admin = models.BooleanField(_('admin'),default=False) #admin/superuser
+    authenticated = models.BooleanField(_('authenticated'),default=False) # for authentication
+    date_joined=models.DateField(_('date_joined'),auto_now_add=True)
 
     USERNAME_FIELD = 'username'
     # email and password are required
@@ -91,11 +106,33 @@ class RBCUser(AbstractBaseUser):
     # custom user manager
     objects = RBCUserManager()
 
+    class Meta:
+        verbose_name=_('user')
+        verbose_name_plural = _('users')
+
+
     def __str__(self):
         return self.username
 
     def get_username(self):
         return self.username
+
+    def get_full_name(self):
+        '''
+                Returns the first_name plus the last_name, with a space in between.
+                '''
+        full_name = '%s %s' % (self.first_name, self.last_name)
+        return full_name.strip()
+
+
+    def get_short_name(self):
+        '''
+        Returns the short name for the user.
+        '''
+        return self.first_name
+
+    #def email_user(self):
+        #
 
     #def get_email(self):
         #return self.email
@@ -125,3 +162,5 @@ class RBCUser(AbstractBaseUser):
     @property
     def is_authenticated(self):
         return self.authenticated
+
+post_save.connect(create_profile, sender=settings.AUTH_USER_MODEL)

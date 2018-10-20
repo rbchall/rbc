@@ -13,7 +13,8 @@
 
 </head>
 <body>
-<div>
+<br>
+<div class="container-fluid">
  <nav class="navbar navbar-expand-sm bg-light navbar-light ">
    <a class="navbar-brand" href="{% url 'home:index' %}">
     <img src="{{hostel.Hostel_logo.url}}" alt="{{hostel.Hostel_short}}" style="width:50px;">
@@ -29,6 +30,12 @@
     </li>
     <li class="nav-item">
       <a class="nav-link" href="{% url 'Account:signup' %}">Signup</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'Account:login' %}">login</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'Profile:profile_view' %}">profile</a>
     </li>
          {% block nav %}
          {% endblock %}

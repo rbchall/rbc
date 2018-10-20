@@ -46,7 +46,7 @@ INSTALLED_APPS = [
     'Profile.apps.ProfileConfig',
     
     ### plugins ###
-    'multiselectfield',
+    #'multiselectfield',
 ]
 
 AUTH_USER_MODEL= 'Account.RBCUser'  # changes default usermodel to ours

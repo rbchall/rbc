@@ -4,9 +4,10 @@ from django.contrib import admin
 #from django.contrib.auth import login,logout
 from django.contrib.auth import views as authviews
 
-app_name = 'Account'
+app_name = 'Profile'
 
 urlpatterns=[
-    path('login', views.login_view, name='login'),
-    path('signup', views.signup_view, name='signup'),
+    path('', views.view_profile, name='profile_view'),
+    path('edit', views.edit_profile, name='profile_edit'),
+
 ]
