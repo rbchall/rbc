@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% load static %}
+{% load staticfiles %}
+
+{% block title%}
+{{title}}
+{%endblock%}
+
+{% block preloader %}
+{% endblock %}
+
+{% block nav%}
+{% endblock %}
+
+{% block body %}
+<div class="container">
+     <div class="table-responsive">
+         <table class="table">
+             <thead>
+             <tr>
+                 <th>Total Meal</th>
+                 <th>Veg</th>
+                 <th>Veg On Egg</th>
+                 <th>Veg On Fish</th>
+                 <th>Veg On Chicken</th>
+                 <th>Veg On Mutton</th>
+             </tr>
+             </thead>
+             <tbody>
+             <tr>
+                <td>{{total}}</td>
+                <td>{{veg}}</td>
+                <td>{{egg}}</td>
+                <td>{{fish}}</td>
+                <td>{{Chicken}}</td>
+                <td>{{mutton}}</td>
+        </tr>
+      </tbody>
+         </table>
+     </div>
+
+</div>
+
+{% endblock %}
+
+{% block script %}
+{% endblock %}

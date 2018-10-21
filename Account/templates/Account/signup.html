@@ -10,23 +10,30 @@
 
 {% endblock %}
 {% block nav%}
-    <li class="nav-item">
-      <a class="nav-link" href="{% url 'home:logout' %}">logout</a>
-    </li>
+<a class="nav-link" href="{% url 'home:login' %}">Login</a>
 {% endblock %}
 {% block body %}
 <div class="container" >
     {% if messages %}
             <ul>
-                {% for message in messages %}
-                <li>{{ message }}</li>
-                {% endfor %}
+                {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                    <div {% if message.tags %} class="alert alert-{{ message.tags }}"{% endif %}>
+                    {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}Important: {% endif %}
+                    {{ message }}
+                    </div>
+                    {% endfor %}
+                </ul>
+                {% endif %}
             </ul>
         {% endif %}
-    <h3>{{title}} to RBCian Account</h3>
     {% if error %}
+    <div class="alert alert-warning">
         {{ error }}
+    </div>
     {% endif %}
+    <h3>{{title}} to RBCian Account</h3>
 
     <form method='POST'>
         {% csrf_token %}
@@ -39,7 +46,7 @@
                 </td>
             </tr>
         </table>
-        <form>
+        </form>
 </div>
 
 {% endblock %}

@@ -35,11 +35,15 @@ def signup_view(request):
             user.save()
             messages.success(request, 'Account created successfully')
             form = SignUP_form()
-            return redirect('/login')
+            return redirect('/signup')
+        else:
+            form = SignUP_form(request.POST)
+            messages.error(request, 'Error occured ')
+            context.update({'form': form})
+            return render(request, 'Account/signup.html', context)
 
     else:
         form = SignUP_form()
-        #context = {'form':form}
         context.update({'form':form})
     return render(request, 'Account/signup.html',context)
 
@@ -59,7 +63,7 @@ def login_view(request):
             if user:
                 if user.authenticated:
                     login(request, user)
-                    return HttpResponseRedirect('/')
+                    return redirect('/profile')
                 else:
                     return HttpResponse("Your account is NOT authenticated.")
             else:

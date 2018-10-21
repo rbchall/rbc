@@ -24,20 +24,31 @@
          <span class="navbar-toggler-icon"></span>
      </button>
      <div class="collapse navbar-collapse" id="collapsibleNavbar">
-     <ul class="navbar-nav ml-auto">
+     <ul class="nav ml-auto justify-content-end nav-tabs">
+         <li class="nav-item">
+      <a class="nav-link" href="{% url 'home:index' %}">Home</a>
+    </li>
     <li class="nav-item">
       <a class="nav-link" href="{% url 'mess:home' %}">Mess</a>
     </li>
-    <li class="nav-item">
-      <a class="nav-link" href="{% url 'Account:signup' %}">Signup</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="{% url 'Account:login' %}">login</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="{% url 'Profile:profile_view' %}">profile</a>
-    </li>
          {% block nav %}
+{% if request.user.is_anonymous == False %}
+         <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">{{user}}</a>
+    <div class="dropdown-menu">
+        <a class="dropdown-item" href="{% url 'Profile:profile_view' %}">profile</a>
+        <a class="dropdown-item" href="{% url 'home:logout' %}">Logout</a>
+    </div>
+    </li>
+                    {% else %}
+                        <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Signup/Login</a>
+    <div class="dropdown-menu">
+      <a class="dropdown-item" href="{% url 'home:signup' %}">Signup</a>
+      <a class="dropdown-item" href="{% url 'home:login' %}">Login</a>
+    </div>
+    </li>
+                    {% endif%}
          {% endblock %}
     <li class="nav-item">
       <a class="nav-link" href="/admin">Admin</a>

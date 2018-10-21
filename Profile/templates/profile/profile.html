@@ -10,19 +10,49 @@
 
 {% endblock %}
 {% block nav%}
-
+    <a class="nav-link" href="{% url 'home:logout' %}">Logout</a>
 {% endblock %}
 {% block body %}
 
 <div class="container">
     <h2>Profile</h2>
     <br>
-    <p>user: {{user}}</p>
-    <p>First Name: {{user.first_name}}</p>
-    <p>Last Name: {{user.last_name}}</p>
-    <p>Room Number:{{user.room_number}}</p>
-    <p>Year: {{user.year}}</p>
-    <p>Fine: {{User.Fine}}</p>
+    <div class="row">
+        <div class="col-md">
+            <p>User: <b>{{user.username}}</b> </p>
+        </div>
+        <div class="col-md">
+            <a class="" href="{% url 'Profile:profile_edit' %}">Edit your profile</a>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-md">
+            <ul>
+                <li class="list-group-item"><b>First Name:</b> {{user.first_name}}</li>
+                <li class="list-group-item"><b>Last Name:</b> {{user.last_name}}</li>
+                <li class="list-group-item"><b>Room Number:</b>{{user.room_number}}</li>
+                <li class="list-group-item"><b>Year:</b> {{user.year}}</li>
+            </ul>
+        </div>
+        <div class="col-md">
+            <ul>
+                <li class="list-group-item"><b>Fine:</b> {{User.fine}}</li>
+                <li class="list-group-item">veg: {{User.veg}}</li>
+                <li class="list-group-item">veg on gg: {{User.veg_on_egg}}</li>
+                <li class="list-group-item">veg on fish: {{User.veg_on_fish}}</li>
+                <li class="list-group-item">veg on chicken: {{User.veg_on_chicken}}</li>
+                <li class="list-group-item">veg on mutton: {{User.veg_on_mutton}}</li>
+                <li class="list-group-item">meal status:
+                    {% if User.meal_status == True %}
+                        <b>ON</b>
+                    {% else %}
+                        <b>OFF</b>
+                    {% endif%}
+                </li>
+            </ul>
+        </div>
+    </div>
 </div>
 
 

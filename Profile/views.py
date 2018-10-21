@@ -18,11 +18,13 @@ User = get_user_model()
 @login_required(login_url='/login')
 def view_profile(request):
     hostel = get_object_or_404(Hostel, slug="RBC")
+    profile = get_object_or_404(UserProfile, user=request.user)
     title = str(request.user) + " Profile"
     context = {
         "title": title,
         'hostel': hostel,
         'user': request.user,
+        'User':profile,
     }
     return render(request, 'profile/profile.html', context)
 
@@ -31,22 +33,26 @@ def view_profile(request):
 def edit_profile(request):
     hostel = get_object_or_404(Hostel, slug="RBC")
     title = "edit " + str(request.user) + " Profile"
+    profile = get_object_or_404(UserProfile, user=request.user)
     context = {
         "title": title,
         'hostel': hostel,
         'user': request.user,
+        'User': profile,
     }
     if request.method == "POST":
-        form = Profile_edit_form(request.POST, instance=request.user)
+        form = Profile_edit_form(request.POST, instance=profile)
         if form.is_valid():
-            form.save()
+            data = form.save(commit=False)
+            data.save()
             return redirect('/profile')
     else:
-        form = Profile_edit_form(instance=request.user)
+        form = Profile_edit_form(instance=profile)
         context = {
             "title": title,
             'hostel': hostel,
             'user': request.user,
-            'form': form
+            'form': form,
+            'User': profile,
         }
     return render(request, 'profile/edit_profile.html', context)
