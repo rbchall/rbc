@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'mq)3h@ufzr2(z#5j%+vr3cdp(-(7n+lq=mokq86y94tr#mez^e'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = []
 
@@ -40,7 +40,11 @@ INSTALLED_APPS = [
     'mess.apps.MessConfig',
     'net.apps.NetConfig',
     'home.apps.HomeConfig',
+    'Account.apps.AccountConfig',
+    'Profile.apps.ProfileConfig',
 ]
+
+AUTH_USER_MODEL= 'Account.RBCUser'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -57,7 +61,7 @@ ROOT_URLCONF = 'rbcweb.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['templates'],
+        'DIRS': ['','templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -102,6 +106,8 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+from django.contrib.messages import constants as message_constants
+MESSAGE_TAGS = {message_constants.ERROR: 'danger'}
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/
@@ -127,5 +133,5 @@ STATICFILES_DIRS = [
     '/var/www/static/',
 ]
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = os.path.join(BASE_DIR, '../media')
 MEDIA_URL = '/media/'
