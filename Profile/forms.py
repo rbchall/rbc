@@ -9,7 +9,7 @@ User= get_user_model()
 
 class Profile_edit_form(forms.ModelForm):
     class Meta:
-        models = UserProfile
+        model = UserProfile
         exclude =[
             'user',
             'fine',
