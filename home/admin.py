@@ -2,7 +2,7 @@ from django.contrib import admin
 
 # Register your models here.
 
-from .models import *
+from .models import Hostel, HostelImgScroll, ImageUpload
 
 
 class Hostel_admin_view(admin.ModelAdmin):
@@ -16,11 +16,11 @@ class Scroll_image(admin.ModelAdmin):
     list_display = ('Image_description', 'Images_scroll', 'Image_comment', 'Image_priority')
 
 
-admin.site.register(Hostel_img_scroll, Scroll_image)
+admin.site.register(HostelImgScroll, Scroll_image)
 
 
 class upload_image(admin.ModelAdmin):
     list_display = ('image_slug', 'image',)
 
-admin.site.register(image_upload, upload_image)
+admin.site.register(ImageUpload, upload_image)
 

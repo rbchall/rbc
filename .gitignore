@@ -23,3 +23,6 @@ media/*
 
 .idea
 datadump.json
+.vscode
+*.sublime-project
+*.sublime-workspace
