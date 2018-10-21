@@ -33,8 +33,8 @@ class UserProfile(models.Model):
     veg_on_mutton = models.BooleanField(default=False)
     fine = models.IntegerField(blank='', null='', default='0')
 
-    # def __str__(self):
-    #    return self.user
+    def __str__(self):
+        return self.user.username
 
 
 def create_profile(sender, **kwargs):

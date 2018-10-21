@@ -17,28 +17,32 @@
 <div class="container">
     <h2>Profile</h2>
     <br>
-    <p>user: {{user}}</p>
-    <p>First Name: {{user.first_name}}</p>
-    <p>Last Name: {{user.last_name}}</p>
-    <p>Room Number:{{user.room_number}}</p>
-    <p>Year: {{user.year}}</p>
-
-</div>
-
-<div class="container">
-    <h2>edit profile</h2>
-    <form method='POST'>
-        {% csrf_token %}
-        <table>
-            {{ form.as_table}}
-            <tr>
-                <td></td>
-                <td>
-                    <button type='submit' class="btn btn-primary">Submit</button>
-                </td>
-            </tr>
-        </table>
-        <form>
+    <div class="row">
+    <div class="col-md card">
+        <div class="card-header"><p>User:<b> {{user}}</b></p></div>
+        <div class="card-body">
+            <p>First Name: {{user.first_name}}</p>
+            <p>Last Name: {{user.last_name}}</p>
+            <p>Room Number:{{user.room_number}}</p>
+            <p>Year: {{user.year}}</p></div>
+        <div class="card-footer"><b>Fine:</b> {{User.fine}}</div>
+    </div>
+    <div class="col-md">
+        <h2>Edit you Profile</h2>
+        <form method='POST'>
+            {% csrf_token %}
+            <table>
+                {{ form}}
+                <tr>
+                    <td></td>
+                    <td>
+                        <button type='submit' class="btn btn-primary">Submit</button>
+                    </td>
+                </tr>
+            </table>
+            <form>
+    </div>
+    </div>
 </div>
 
 
