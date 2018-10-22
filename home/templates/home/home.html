@@ -5,18 +5,41 @@
     Home
 {% endblock %}
 
-{% block preloader %}
-
+{% block style %}
+    <meta name="description" content="{{head_des}}">
+    <meta name="author" content="{{author}}">
 {% endblock %}
 
 {% block body %}
-<div class="container">
-<h4>home page</h4>
-{{hostel.Hostel_name}}
+<header>
+      <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+          <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+          <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+          <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner" role="listbox">
+          <!-- Slide One - Set the background image for this slide in the line below -->
+            {% for image in hostel_scroll_img %}
+            <div class="carousel-item {% if image.Image_priority == 1 %}active {%endif%}" style="background-image: url({{image.Images_scroll.url}})">
+            <div class="carousel-caption d-none d-md-block">
+              <h3>{{image.Image_comment}}</h3>
+              <p>{{image.Image_description}}</p>
+            </div>
+          </div>
+            {% endfor %}
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </a>
+      </div>
+    </header>
 
-{% for image in hostel_scroll_img %}
-<img src="{{image.Images_scroll.url}}" alt="{{image.Image_description}}" height="100" width="100" ></img>
-{% endfor %}
 </div>
 <!-- about us -->
 
