@@ -25,7 +25,10 @@ SECRET_KEY = 'mq)3h@ufzr2(z#5j%+vr3cdp(-(7n+lq=mokq86y94tr#mez^e'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS =[
+    '127.0.0.1',
+    'sarbesh.pythonanywhere.com',
+    ]
 
 
 # Application definition
@@ -83,7 +86,10 @@ WSGI_APPLICATION = 'rbcweb.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'NAME': 'sarbesh$RBC',
+        'USER': 'sarbesh',
+        'PASSWORD': 'Veyron@16.4',
+        'HOST': 'sarbesh.mysql.pythonanywhere-services.com',
     }
 }
 
@@ -128,10 +134,13 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static/"),
-    '/var/www/static/',
-]
+#STATICFILES_DIRS = [
+#    os.path.join(BASE_DIR, "../static/"),
+#    '/var/www/static/',
+#]
+
+STATIC_ROOT = os.path.join(BASE_DIR, '../static')
+#STATIC_ROOT = '/var/www/static'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, '../media')
 MEDIA_URL = '/media/'
