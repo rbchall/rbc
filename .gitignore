@@ -23,6 +23,8 @@ media/*
 
 ### for migrations ##
 migrations/*
+__pycache__/*
+
 
 .idea
 datadump.json
