@@ -23,9 +23,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'mq)3h@ufzr2(z#5j%+vr3cdp(-(7n+lq=mokq86y94tr#mez^e'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS =[
+    '127.0.0.1',
+    'sarbesh.pythonanywhere.com',
+    ]
 
 
 # Application definition
@@ -40,7 +43,11 @@ INSTALLED_APPS = [
     'mess.apps.MessConfig',
     'net.apps.NetConfig',
     'home.apps.HomeConfig',
+    'Account.apps.AccountConfig',
+    'Profile.apps.ProfileConfig',
 ]
+
+AUTH_USER_MODEL= 'Account.RBCUser'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -57,7 +64,7 @@ ROOT_URLCONF = 'rbcweb.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['templates'],
+        'DIRS': ['','templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -79,7 +86,10 @@ WSGI_APPLICATION = 'rbcweb.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'NAME': 'sarbesh$RBC',
+        'USER': 'sarbesh',
+        'PASSWORD': 'Veyron@16.4',
+        'HOST': 'sarbesh.mysql.pythonanywhere-services.com',
     }
 }
 
@@ -102,6 +112,8 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+from django.contrib.messages import constants as message_constants
+MESSAGE_TAGS = {message_constants.ERROR: 'danger'}
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/
@@ -122,10 +134,13 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static/"),
-    '/var/www/static/',
-]
+#STATICFILES_DIRS = [
+#    os.path.join(BASE_DIR, "../static/"),
+#    '/var/www/static/',
+#]
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+STATIC_ROOT = os.path.join(BASE_DIR, '../static')
+#STATIC_ROOT = '/var/www/static'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, '../media')
 MEDIA_URL = '/media/'

@@ -33,7 +33,7 @@ class RBCUserManager(BaseUserManager):
     def create_user(self, username, password=None, year='', room_number='', first_name='', middle_name='', last_name='', is_staff=False, is_active=False, is_admin=False, is_authenticated=False, **extra_fields):
         #if not email:
             #raise ValueError("Email not valid")
-        now = timezone.now()
+        #now = timezone.now()
         if not password:
             raise ValueError("Password error")
         if not year:
@@ -49,8 +49,6 @@ class RBCUserManager(BaseUserManager):
             first_name=first_name,
             middle_name=middle_name,
             last_name=last_name,
-            last_login=now,
-            date_joined=now,
             **extra_fields,
         )
         user_obj.set_password(password)
@@ -98,7 +96,7 @@ class RBCUser(AbstractBaseUser):
     staff = models.BooleanField(_('staff'),default=False) #staff non admin/super
     admin = models.BooleanField(_('admin'),default=False) #admin/superuser
     authenticated = models.BooleanField(_('authenticated'),default=False) # for authentication
-    date_joined=models.DateField(_('date_joined'),auto_now_add=True)
+    #date_joined=models.DateField(_('date_joined'),auto_now_add=True)
 
     USERNAME_FIELD = 'username'
     # email and password are required
