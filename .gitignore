@@ -25,6 +25,10 @@ media/*
 migrations/*
 __pycache__/*
 
+<<<<<<< HEAD
+
+=======
+>>>>>>> master
 .idea
 datadump.json
 .vscode

@@ -3,6 +3,7 @@ from django.contrib import admin
 # Register your models here.
 
 from .models import Hostel, HostelImgScroll, ImageUpload
+from .models import AAA as AA
 
 
 class Hostel_admin_view(admin.ModelAdmin):
@@ -24,3 +25,7 @@ class upload_image(admin.ModelAdmin):
 
 admin.site.register(ImageUpload, upload_image)
 
+class AAA(admin.ModelAdmin):
+    list_display = ('Event',)
+
+admin.site.register(AA, AAA)

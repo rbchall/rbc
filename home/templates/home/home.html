@@ -5,19 +5,51 @@
     Home
 {% endblock %}
 
-{% block preloader %}
-
+{% block style %}
+    <meta name="description" content="{{head_des}}">
+    <meta name="author" content="{{author}}">
+    <link href="{% static "css/corousla_overlay_custome.css" %}" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 {% endblock %}
 
 {% block body %}
-<div class="container">
-<h4>home page</h4>
-{{hostel.Hostel_name}}
+<header>
+    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner" role="listbox">
+          <!-- Slide One - Set the background image for this slide in the line below -->
+            {% for image in hostel_scroll_img %}
+            <div class="carousel-item {% if image.Image_priority == 1 %}active {%endif%}" style="background-image: url({{image.Images_scroll.url}})">
+                <div class="carousel-caption d-none d-md-block">
+                    <h3>{{image.Image_comment}}</h3>
+                    <p>{{image.Image_description}}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </a>
+    </div>
+    <div class="corousal-text hidden-xs">
+        <div class="col-md-12 text-center">
+            <br><br>
+            <span class="corousal-heading-lower">Rishi Bankim Chandra Hall</span>
+            <span class="corousal-heading-upper">Abnegations, Altruistic, Exuberant are few among those which makes a human into Keora.The transcendent memories is what you make at RBC Hall, Which is better described in Hindi syllable -- GHAR.<br><br>Alfresco'19<br><br>Comming soon........ </span>
+        </div>
+    </div>
+</header>
 
-{% for image in hostel_scroll_img %}
-<img src="{{image.Images_scroll.url}}" alt="{{image.Image_description}}" height="100" width="100" ></img>
-{% endfor %}
-</div>
+<div class="container">
 <!-- about us -->
 
 
@@ -25,9 +57,24 @@
 
 
 <!-- AAA -->
-
+    <h1 class="my-4" align="center">Accoglienza Alfresco Alvida</h1>
+    <div class="row">
+        {% for A in AAA %}
+        <div class="col-lg-4 mb-4">
+          <div class="card h-100">
+            <h4 class="card-header">{{A.Event}}</h4>
+            <div class="card-body">
+              <p class="card-text">{{A.description}}</p>
+            </div>
+            <div class="card-footer">
+              <a href="#" class="btn btn-primary">Learn More</a>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+    </div>
 
 <!-- alfresco_upcomming -->
 
-
+</div>
 {% endblock %}
