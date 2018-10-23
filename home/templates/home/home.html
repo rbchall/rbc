@@ -8,6 +8,8 @@
 {% block style %}
     <meta name="description" content="{{head_des}}">
     <meta name="author" content="{{author}}">
+    <link href="{% static "css/corousla_overlay_custome.css" %}" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 {% endblock %}
 
 {% block body %}
@@ -38,6 +40,13 @@
           <span class="sr-only">Next</span>
         </a>
     </div>
+    <div class="corousal-text hidden-xs">
+        <div class="col-md-12 text-center">
+            <br><br>
+            <span class="corousal-heading-lower">Rishi Bankim Chandra Hall</span>
+            <span class="corousal-heading-upper">Abnegations, Altruistic, Exuberant are few among those which makes a human into Keora.The transcendent memories is what you make at RBC Hall, Which is better described in Hindi syllable -- GHAR.<br><br>Alfresco'19<br><br>Comming soon........ </span>
+        </div>
+    </div>
 </header>
 
 <div class="container">
@@ -50,40 +59,20 @@
 <!-- AAA -->
     <h1 class="my-4" align="center">Accoglienza Alfresco Alvida</h1>
     <div class="row">
+        {% for A in AAA %}
         <div class="col-lg-4 mb-4">
           <div class="card h-100">
-            <h4 class="card-header">Card Title</h4>
+            <h4 class="card-header">{{A.Event}}</h4>
             <div class="card-body">
-              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse necessitatibus neque.</p>
+              <p class="card-text">{{A.description}}</p>
             </div>
             <div class="card-footer">
               <a href="#" class="btn btn-primary">Learn More</a>
             </div>
           </div>
         </div>
-        <div class="col-lg-4 mb-4">
-          <div class="card h-100">
-            <h4 class="card-header">Card Title</h4>
-            <div class="card-body">
-              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis ipsam eos, nam perspiciatis natus commodi similique totam consectetur praesentium molestiae atque exercitationem ut consequuntur, sed eveniet, magni nostrum sint fuga.</p>
-            </div>
-            <div class="card-footer">
-              <a href="#" class="btn btn-primary">Learn More</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-4 mb-4">
-          <div class="card h-100">
-            <h4 class="card-header">Card Title</h4>
-            <div class="card-body">
-              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse necessitatibus neque.</p>
-            </div>
-            <div class="card-footer">
-              <a href="#" class="btn btn-primary">Learn More</a>
-            </div>
-          </div>
-        </div>
-      </div>
+        {% endfor %}
+    </div>
 
 <!-- alfresco_upcomming -->
 

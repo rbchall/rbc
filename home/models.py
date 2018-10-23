@@ -44,3 +44,22 @@ class ImageUpload(models.Model):
     image= models.ImageField(upload_to='Hostel/Images/')
     image_description= models.CharField(max_length=100)
     image_slug= models.CharField(max_length=10, null=False, blank=False, default="R.B.C Hall", help_text="slug to identify image for seo, keep different")
+
+AAA_CHOICES = (
+    ('Accoglienza', 'Accoglienza'),
+    ('Alfresco', 'Alfresco'),
+    ('Alvida', 'Alvida'),
+)
+AAA_priotity = (
+    (1, 'Accoglienza'),
+    (2, 'Alfresco'),
+    (3, 'Alvida'),
+)
+
+class AAA(models.Model):
+    Event = models.CharField(max_length=20,choices=AAA_CHOICES,blank=False,null=True)
+    description = models.TextField(max_length=255,blank=False,null=False)
+    url = models.URLField(help_text="if a page exists for the event then enter or leave '#' ", blank=True, null=True)
+
+    def __str__(self):
+        return "{}".format(self.Event)

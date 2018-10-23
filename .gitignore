@@ -21,6 +21,9 @@ media/*
 ### for python compile files###
 *.pyc
 
+### for migrations ##
+migrations/*
+
 .idea
 datadump.json
 .vscode
