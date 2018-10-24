@@ -10,5 +10,5 @@ def index(request):
     head_des = hostel.Description_for_seo
     author = hostel.author_of_page
     A = AAA.objects.all()
-    context={'hostel': hostel, 'hostel_scroll_img': hostel_scrool_image, 'head_des':head_des, 'author':author, 'AAA':A}
+    context={'hostel': hostel, 'hostel_scroll_img': hostel_scrool_image, 'head_des':head_des, 'author':author, 'AAA':A, 'n' : range(len(hostel_scrool_image))}
     return render(request,'home/home.html', context)
