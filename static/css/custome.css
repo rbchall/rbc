@@ -35,3 +35,6 @@
     color: #000;
     background-color: #FFF;
 }
+body {
+    padding-top: 70px;
+}
