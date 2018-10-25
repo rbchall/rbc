@@ -9,15 +9,6 @@
     <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 
-<!-- jQuery library -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
-<!-- Popper JS -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
-
-<!-- Latest compiled JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
-
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
@@ -26,6 +17,7 @@
 
     <!-- Custom styles for this template -->
     <link href="{% static "css/modern-business.css" %}" rel="stylesheet">
+    <link href="{% static "css/custome.css" %}" rel="stylesheet">
 
     {%block style%}
     <meta name="description" content="{{head_des}}">
@@ -34,14 +26,14 @@
 </head>
 
 <body>
- <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark ">
-     <div class="container-fluid">
+ <nav class="navbar fixed-top navbar-expand-sm navbar-dark bg-secondary ">
          <a class="navbar-brand" href="{% url 'home:index' %}">
-             <img src="{{hostel.Hostel_logo.url}}" alt="{{hostel.Hostel_short}}" style="width:50px;">    Rishi Bankim Chandra Hall</a>
-         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+             <img src="{{hostel.Hostel_logo.url}}" alt="{{hostel.Hostel_short}}" style="width:50px;">    Rishi Bankim Chandra Hall
+         </a>
+         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
              <span class="navbar-toggler-icon"></span>
          </button>
-         <div class="collapse navbar-collapse" id="navbarResponsive">
+         <div class="collapse navbar-collapse" id="collapsibleNavbar">
              <ul class="navbar-nav ml-auto">
                  <li class="nav-item">
                      <a class="nav-link" href="{% url 'home:index' %}">Home</a>
@@ -73,9 +65,7 @@
                  </li>
              </ul>
          </div>
-     </div>
  </nav>
- <br>
 {% block body %}
 {% endblock %}
  <!-- Footer -->
@@ -86,10 +76,15 @@
       <!-- /.container -->
  </footer>
      <!-- Latest compiled JavaScript -->
- <script src="{% static "js/bootstrap.min.js"%}"></script>
- <script src="{% static "js/jquery.min.js"%}"></script>
- <script src="{% static "js/popper.min.js"%}"></script>
- <script src="{% static "js/bootstrap.bundle.min.js"%}"></script>
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
     {% block script %}
 
     {% endblock %}
