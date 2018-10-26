@@ -13,6 +13,7 @@ venv.bak/
 
 ### for database ##
 *.sqlite3
+sarbesh$RBC
 
 
 ### for media ###
@@ -25,10 +26,7 @@ media/*
 migrations/*
 __pycache__/*
 
-<<<<<<< HEAD
-
-=======
->>>>>>> master
+#### for IDE ###
 .idea
 datadump.json
 .vscode
