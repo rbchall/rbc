@@ -23,7 +23,7 @@ media/*
 *.pyc
 
 ### for migrations ##
-migrations/*
+migrations/
 __pycache__/*
 
 #### for IDE ###
@@ -33,6 +33,10 @@ datadump.json
 *.sublime-project
 *.sublime-workspace
 
+*/migrations/
+/migrations/*
+*/migrations/*
+## global rules###
 .DS_STORE
 
 # Virtualenv related
