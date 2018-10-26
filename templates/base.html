@@ -5,7 +5,6 @@
 <head>
     <meta charset="UTF-8">
     <title>{% block title%}{%endblock title %}|Rishi Bankim Chnadra Hall</title>
-    <link rel="stylesheet" href="{% static "css/bootstrap.min.css" %}">
     <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 
@@ -28,7 +27,8 @@
 <body>
  <nav class="navbar fixed-top navbar-expand-sm navbar-dark bg-secondary ">
          <a class="navbar-brand" href="{% url 'home:index' %}">
-             <img src="{{hostel.Hostel_logo.url}}" alt="{{hostel.Hostel_short}}" style="width:50px;">    Rishi Bankim Chandra Hall
+             <span><img src="{{hostel.Hostel_logo.url}}" alt="{{hostel.Hostel_short}}" style="width:50px;"></span>
+             <span>Rishi Bankim Chandra Hall</span>
          </a>
          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
              <span class="navbar-toggler-icon"></span>
