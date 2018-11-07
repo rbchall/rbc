@@ -9,14 +9,14 @@
 }
 .corousal-text .corousal-heading-upper {
   display: block;
-  font-size: 1rem;
-  font-weight: 800;
+  font-weight: 400;
+  font-size: 4vw;
 }
 
 .corousal-text .corousal-heading-lower {
-  font-size: 4rem;
-  font-weight: 100;
-  line-height: 4rem;
+  font-size: 2vw;
+  font-weight: 200;
+  line-height: unset;
 }
 .btn-min-block
 {
@@ -28,7 +28,6 @@
     color: #FFF;
     background-color: transparent;
     border-color: #FFF;
-    margin-right: 15px;
 }
 .btn-clear:hover
 {

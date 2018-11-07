@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/2.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.1/ref/settings/
 """
-
+import django_heroku
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -86,10 +86,11 @@ WSGI_APPLICATION = 'rbcweb.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'sarbesh$RBC',
-        'USER': 'sarbesh',
-        'PASSWORD': 'Veyron@16.4',
-        'HOST': 'sarbesh.mysql.pythonanywhere-services.com',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        #'NAME': 'sarbesh$RBC',
+        #'USER': 'sarbesh',
+        #'PASSWORD': 'Veyron@16.4',
+        #'HOST': 'sarbesh.mysql.pythonanywhere-services.com',
     }
 }
 
@@ -144,3 +145,5 @@ STATIC_ROOT = os.path.join(BASE_DIR, '../static')
 
 MEDIA_ROOT = os.path.join(BASE_DIR, '../media')
 MEDIA_URL = '/media/'
+
+django_heroku.settings(locals())
