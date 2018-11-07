@@ -25,10 +25,7 @@ SECRET_KEY = 'mq)3h@ufzr2(z#5j%+vr3cdp(-(7n+lq=mokq86y94tr#mez^e'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS =[
-    '127.0.0.1',
-    'sarbesh.pythonanywhere.com',
-    ]
+ALLOWED_HOSTS =[]
 
 
 # Application definition
@@ -40,11 +37,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'mess.apps.MessConfig',
-    'net.apps.NetConfig',
-    'home.apps.HomeConfig',
-    'Account.apps.AccountConfig',
-    'Profile.apps.ProfileConfig',
+    'Account',
+    'mess',
+    'net',
+    'home',
+    'Profile',
 ]
 
 AUTH_USER_MODEL= 'Account.RBCUser'
