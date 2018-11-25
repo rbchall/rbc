@@ -29,7 +29,7 @@
         <div class="carousel-inner" role="listbox">
           <!-- Slide One - Set the background image for this slide in the line below -->
             {% for image in hostel_scroll_img %}
-            <div class="carousel-item {% if image.Image_priority == 1 %}active {%endif%}" style="background-image: url({{image.Images_scroll.url}})">
+            <div class="carousel-item overlay {% if image.Image_priority == 1 %}active {%endif%}" style="background-image: url({{image.Images_scroll.url}})">
                 <div class="carousel-caption d-none d-md-block">
                     <h3>{{image.Image_comment}}</h3>
                     <p>{{image.Image_description}}</p>

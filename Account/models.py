@@ -11,6 +11,8 @@ from Profile.models import create_profile
 from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
 from time import timezone
+import datetime
+from django.utils.timezone import utc
 
 YEAR_CHOICES = (
     (2, '2nd'),
@@ -21,8 +23,31 @@ ROOM_NUMBER = (
     (101, '101'),
     (102, '102'),
     (103, '103'),
+    (104, '104'),
+    (105, '105'),
+    (201, '201'),
     (202, '202'),
+    (203, '203'),
+    (204, '204'),
+    (205, '205'),
+    (207, '207'),
+    (208, '208'),
+    (209, '209'),
+    (210, '210'),
     (211, '211'),
+    (212, '212'),
+    (301, '301'),
+    (302, '302'),
+    (303, '303'),
+    (304, '304'),
+    (305, '305'),
+    (306, '306'),
+    (307, '307'),
+    (308, '308'),
+    (309, '309'),
+    (310, '310'),
+    (311, '311'),
+    (312, '312'),
 )
 
 
@@ -85,7 +110,7 @@ class RBCUserManager(BaseUserManager):
 
 ## ## custome usermodel
 class RBCUser(AbstractBaseUser):
-    #now = timezone.now()
+    now = datetime.datetime.utcnow().replace(tzinfo=utc)
     username = models.CharField(_('username'),max_length=50, blank=True, null=True, unique=True)
     first_name = models.CharField(_('first_name'),max_length=50, blank=False, null=False)
     middle_name = models.CharField(_('middle_name'),max_length=50, blank=True, null=True)
@@ -96,7 +121,7 @@ class RBCUser(AbstractBaseUser):
     staff = models.BooleanField(_('staff'),default=False) #staff non admin/super
     admin = models.BooleanField(_('admin'),default=False) #admin/superuser
     authenticated = models.BooleanField(_('authenticated'),default=False) # for authentication
-    #date_joined=models.DateField(_('date_joined'),auto_now_add=True)
+    date_joined=models.DateField(_('date_joined'),auto_now_add=True)
 
     USERNAME_FIELD = 'username'
     # email and password are required

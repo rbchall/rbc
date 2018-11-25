@@ -3,9 +3,12 @@
     position: absolute;
     top: 50px;
     width: 96.66666666666666%;
-    color: #FFF;
+    color: #000000;
     font-family: 'Raleway';
     text-transform: uppercase;
+}
+.overlay {
+    opacity: .7;
 }
 .corousal-text .corousal-heading-upper {
   display: block;
@@ -35,5 +38,5 @@
     background-color: #FFF;
 }
 body {
-    padding-top: 75px;
+    padding-top: 70px;
 }
