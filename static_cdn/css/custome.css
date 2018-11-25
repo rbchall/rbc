@@ -1,0 +1,39 @@
+.corousal-text
+{
+    position: absolute;
+    top: 50px;
+    width: 96.66666666666666%;
+    color: #FFF;
+    font-family: 'Raleway';
+    text-transform: uppercase;
+}
+.corousal-text .corousal-heading-upper {
+  display: block;
+  font-weight: 400;
+  font-size: 4vw;
+}
+
+.corousal-text .corousal-heading-lower {
+  font-size: 2vw;
+  font-weight: 200;
+  line-height: unset;
+}
+.btn-min-block
+{
+    min-width: 170px;
+    line-height: 26px;
+}
+.btn-clear
+{
+    color: #FFF;
+    background-color: transparent;
+    border-color: #FFF;
+}
+.btn-clear:hover
+{
+    color: #000;
+    background-color: #FFF;
+}
+body {
+    padding-top: 70px;
+}
