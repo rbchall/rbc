@@ -19,21 +19,27 @@
 {% endblock %}
 
 {% block body %}
-<section margine>
+<div class="overlay">
+        <div class="col-md-12 text-center">
+            <h1 class="text-center">{{hostel.Hostel_name}}</h1>
+            <p class="text-center">{{hostel.Hostel_description}}</p>
+        </div>
+    </div>
     <div id="carousel" class="carousel slide" data-ride="carousel">
         <ul class="carousel-indicators">
             {% for i in n %}
-            <li data-target="#carousel" data-slide-to={{i}} class="{% if i == 0 %}active {%endif%}"></li>
+            <li data-target="#carousel" data-slide-to={{i}} class="{% if i == 0 %}active{%endif%}"></li>
             {% endfor %}
         </ul>
-        <div class="carousel-inner" role="listbox">
+        <div class="carousel-inner" >
           <!-- Slide One - Set the background image for this slide in the line below -->
             {% for image in hostel_scroll_img %}
-            <div class="carousel-item overlay {% if image.Image_priority == 1 %}active {%endif%}" style="background-image: url({{image.Images_scroll.url}})">
-                <div class="carousel-caption d-none d-md-block">
+            <div class="carousel-item {% if image.Image_priority == 1 %}active {%endif%}" style="background-image: url({{image.Images_scroll.url}})">
+            {% comment %}<img src="{{image.Images_scroll.url}}" alt="{{image.Image_comment}}">{% endcomment %}
+                {% comment %}<div class="carousel-caption d-none d-md-block">
                     <h3>{{image.Image_comment}}</h3>
                     <p>{{image.Image_description}}</p>
-                </div>
+                </div>{% endcomment %}
             </div>
             {% endfor %}
         </div>
@@ -46,14 +52,13 @@
           <span class="sr-only">Next</span>
         </a>
     </div>
-    <div class="corousal-text hidden-xs">
+    {% comment %}<div class="corousal-text hidden-xs">
         <div class="col-md-12 text-center">
             <br><br>
-            <p class="corousal-heading-upper text-center">{{hostel.Hostel_name}}</p>
-            <span class="corousal-heading-lower text-justify">{{hostel.Hostel_description}}</span>
+            <h1 class="corousal-heading-upper text-center">{{hostel.Hostel_name}}</h1>
+            <p class="corousal-heading-lower text-justify">{{hostel.Hostel_description}}</p>
         </div>
-    </div>
-</section>
+    </div>{% endcomment %}
 
 <div class="container">
 <!-- about us -->
