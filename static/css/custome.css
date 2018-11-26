@@ -7,17 +7,27 @@
     font-family: 'Raleway';
     text-transform: uppercase;
 }
-.overlay {
-    opacity: .7;
-}
+/*.overlay {
+    opacity: .8;
+}*/
 .corousal-text .corousal-heading-upper {
   display: block;
   font-weight: 400;
   font-size: 4vw;
 }
 
+.overlay {
+  color:#fff;
+  position:absolute;
+  z-index:12;
+  top:30%;
+  left:0;
+  width:100%;
+  text-align:center;
+}
+
 .corousal-text .corousal-heading-lower {
-  font-size: 2vw;
+  font-size: 2vw    ;
   font-weight: 200;
   line-height: unset;
 }
@@ -38,5 +48,5 @@
     background-color: #FFF;
 }
 body {
-    padding-top: 70px;
+    padding-top: 5%;
 }
