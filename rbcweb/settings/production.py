@@ -24,14 +24,13 @@ SECRET_KEY = "mq)3h@ufzr2(z#5j%+vr3cdp(-(7n+lq=mokq86y94tr#mez^e'"
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS =['*']
+ALLOWED_HOSTS =['*','127.0.0.1','rbchall.kgec.edu.in']
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 SECURE_SSL_REDIRECT = True
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
 #SECURE_SSL_REDIRECT = True
 SECURE_HSTS_SECONDS = 3600 ## 31536000
-
 # Application definition
 
 INSTALLED_APPS = [
