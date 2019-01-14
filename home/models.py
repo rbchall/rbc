@@ -1,5 +1,9 @@
-from django.db import models
+from distutils.command.upload import upload
+
 from django.core.validators import RegexValidator
+from django.db import models
+from isort.settings import default
+
 
 # Create your models here.
 class Hostel(models.Model):
@@ -59,6 +63,8 @@ AAA_priotity = (
 class AAA(models.Model):
     Event = models.CharField(max_length=20,choices=AAA_CHOICES,blank=False,null=True)
     description = models.TextField(max_length=255,blank=False,null=False)
+    Event_Image = models.ImageField(upload_to='AAA/', default='image.png')
+    Image_Comment = models.CharField(max_length=20,blank=False,null=True)
     url = models.URLField(help_text="if a page exists for the event then enter or leave '#' ", blank=True, null=True)
 
     def __str__(self):
