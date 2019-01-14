@@ -24,7 +24,7 @@ SECRET_KEY = "mq)3h@ufzr2(z#5j%+vr3cdp(-(7n+lq=mokq86y94tr#mez^e'"
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS =['*','127.0.0.1','rbchall.kgec.edu.in']
+ALLOWED_HOSTS =['127.0.0.1','rbchall.kgec.edu.in']
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 SECURE_SSL_REDIRECT = True
 SESSION_COOKIE_SECURE = True
@@ -94,11 +94,6 @@ DATABASES = {
         #'HOST': 'sarbesh.mysql.pythonanywhere-services.com',
     }
 }
-
-import dj_database_url
-
-db_from_env = dj_database_url.config()
-DATABASES['default'].update(db_from_env)
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators

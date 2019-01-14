@@ -25,7 +25,7 @@ SECRET_KEY = 'mq)3h@ufzr2(z#5j%+vr3cdp(-(7n+lq=mokq86y94tr#mez^e'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['rbchall.kgec.edu.in','127.0.0.1','0.0.0.0/0','*','loaclhost','14.139.220.86']
 
 
 # Application definition
@@ -134,7 +134,7 @@ USE_TZ = True
 STATICFILES_DIRS = (os.path.join(BASE_DIR, "../static"),)
 
 STATIC_URL = '/static/'
-#STATIC_ROOT = os.path.join(BASE_DIR, '../static')
+#STATIC_ROOT = os.path.join(BASE_DIR, '../static_cdn')
 
 MEDIA_ROOT = os.path.join(BASE_DIR, '../media')
 MEDIA_URL = '/media/'
