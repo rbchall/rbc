@@ -18,7 +18,7 @@ sarbesh$RBC
 
 ### for media ###
 media/*
-
+static_cdn/*
 ### for python compile files###
 *.pyc
 
