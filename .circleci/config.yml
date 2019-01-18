@@ -1,6 +1,10 @@
 version: 2
 jobs:
   build:
+    docker:
+      - image: circleci/python:3.6.4
+#        environment:
+#          PIPENV_VENV_IN_PROJECT: true
     branches:
       only:
         - circleci
@@ -9,10 +13,7 @@ jobs:
         - new
 
     working_directory: /srv/www/rbc/
-    docker:
-      - image: circleci/python:3.6.4
-#        environment:
-#          PIPENV_VENV_IN_PROJECT: true
+    
     steps:
       - checkout
 #      - run: 
@@ -79,14 +80,14 @@ jobs:
               git rebase master ;
               git push origin production ; 
             fi
-#      - run:
-#          name: Deploy production
-#          command: |
-#            if [ "$CIRCLE_BRANCH" == "production" ];
-#            then
+      - run:
+          name: Deploy production
+          command: |
+            if [ "$CIRCLE_BRANCH" == "production" ];
+            then
 #              cd deploy ;
 #              ansible -i hosts  prod -m ping  -u ubuntu ;
 #              ansible-playbook -i hosts  deploy.yml -u ubuntu  ;
-              #python manage.py migrate ;
-              #sudo service supervisor restart ;
-#            fi
+              python manage.py migrate ;
+              sudo service supervisor restart ;
+            fi
