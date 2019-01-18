@@ -54,39 +54,39 @@ jobs:
       - store_artifacts:
           path: test-reports
           destination: test-reports
-      - run:
-          name: Updating apt and install Ansible and pipenv
-          command: |
-            sudo apt-get update
+#      - run:
+#          name: Updating apt and install Ansible and pipenv
+#          command: |
+#            sudo apt-get update
 #            sudo pip install ansible
 #            sudo pip install pipenv
 #            pipenv install
-      - run:
-          name: Simulate Django Migrations and Unit test
-          command: |
+#      - run:
+#          name: Simulate Django Migrations and Unit test
+#          command: |
 #           
 #            pipenv run "python manage.py migrate"
 #            pipenv run "python manage.py test"
 #            
-      - run:
-        name: Merge master branch to prod
-          command: |
-            if [ "$CIRCLE_BRANCH" == "master" ];
-            then
-            git config user.email "rbchall.official@gmail.com" ;
-            git config user.name "rbchall" ;
-            git checkout production ;
-            git rebase master ;
-            git push origin production ; 
-            fi
-      - run:
-          name: Deploy to production if branch production
-          command: |
-            if [ "$CIRCLE_BRANCH" == "production" ];
-            then
+#      - run:
+#        name: Merge master branch to prod
+#          command: |
+#            if [ "$CIRCLE_BRANCH" == "master" ];
+#            then
+#            git config user.email "rbchall.official@gmail.com" ;
+#            git config user.name "rbchall" ;
+#            git checkout production ;
+#            git rebase master ;
+#            git push origin production ; 
+#            fi
+#      - run:
+#          name: Deploy to production if branch production
+#          command: |
+#            if [ "$CIRCLE_BRANCH" == "production" ];
+#            then
 #              cd deploy ;
 #              ansible -i hosts  prod -m ping  -u ubuntu ;
 #              ansible-playbook -i hosts  deploy.yml -u ubuntu  ;
-            python manage.py migrate
-            sudo service supervisor restart 
-            fi
+#            python manage.py migrate
+            #sudo service supervisor restart 
+#            fi
