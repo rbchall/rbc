@@ -61,26 +61,26 @@ jobs:
 #            sudo pip install ansible
 #            sudo pip install pipenv
 #            pipenv install
-      - run:
-          name: Simulate Django Migrations and Unit test
-          command: |
-            
-            pipenv run "python manage.py migrate"
-            pipenv run "python manage.py test"
-            
-      - run:
-        name: Merge master branch to prod
+#      - run:
+#          name: Simulate Django Migrations and Unit test
 #          command: |
-#            if [ "$CIRCLE_BRANCH" == "master" ];
-#            then
-#            git config user.email "rbchall.official@gmail.com" ;
-#            git config user.name "rbchall" ;
-#            git checkout production ;
-#            git rebase master ;
-#            git push origin production ; 
-#            fi
+#            
+#            pipenv run "python manage.py migrate"
+#            pipenv run "python manage.py test"
+            
       - run:
-        name: Deploy to production if branch production
+          name: Merge master branch to prod
+          command: |
+            if [ "$CIRCLE_BRANCH" == "master" ];
+            then
+            git config user.email "rbchall.official@gmail.com" ;
+            git config user.name "rbchall" ;
+            git checkout production ;
+            git rebase master ;
+            git push origin production ; 
+            fi
+      - run:
+          name: Deploy to production if branch production
           command: |
             if [ "$CIRCLE_BRANCH" == "production" ];
             then
