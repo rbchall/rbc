@@ -87,5 +87,6 @@ jobs:
 #              cd deploy ;
 #              ansible -i hosts  prod -m ping  -u ubuntu ;
 #              ansible-playbook -i hosts  deploy.yml -u ubuntu  ;
-                sudo service supervisor restart 
+            python manage.py migrate
+            sudo service supervisor restart 
             fi
