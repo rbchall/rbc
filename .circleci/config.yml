@@ -70,15 +70,15 @@ jobs:
             
       - run:
         name: Merge master branch to prod
-          command: |
-            if [ "$CIRCLE_BRANCH" == "master" ];
-            then
-            git config user.email "rbchall.official@gmail.com" ;
-            git config user.name "rbchall" ;
-            git checkout production ;
-            git rebase master ;
-            git push origin production ; 
-            fi
+#          command: |
+#            if [ "$CIRCLE_BRANCH" == "master" ];
+#            then
+#            git config user.email "rbchall.official@gmail.com" ;
+#            git config user.name "rbchall" ;
+#            git checkout production ;
+#            git rebase master ;
+#            git push origin production ; 
+#            fi
       - run:
           name: Deploy to production if branch production
           command: |
