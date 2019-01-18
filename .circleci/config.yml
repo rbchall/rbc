@@ -83,11 +83,12 @@ jobs:
       - run:
           name: Deploy production
           command: |
-            if [ "$CIRCLE_BRANCH" == "production" ];
-            then
+#            if [ "$CIRCLE_BRANCH" == "production" ];
+            python manage.py migrate
+#            then
 #              cd deploy ;
 #              ansible -i hosts  prod -m ping  -u ubuntu ;
 #              ansible-playbook -i hosts  deploy.yml -u ubuntu  ;
-              python manage.py migrate ;
-              sudo service supervisor restart ;
-            fi
+#              python manage.py migrate ;
+#              sudo service supervisor restart ;
+#            fi
