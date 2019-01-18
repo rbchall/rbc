@@ -8,7 +8,7 @@ jobs:
         - production
         - new
 
-    working_directory: /srv/www/rbc
+    working_directory: /srv/www/rbc/
     docker:
       - image: circleci/python:3.6.4
 #        environment:
