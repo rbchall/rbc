@@ -23,7 +23,7 @@ media/*
 *.pyc
 
 ### for migrations ##
-migrations/
+#migrations/ ## required fir circleci
 __pycache__/*
 
 #### for IDE ###
@@ -33,9 +33,6 @@ datadump.json
 *.sublime-project
 *.sublime-workspace
 
-*/migrations/
-/migrations/*
-*/migrations/*
 ## global rules###
 .DS_STORE
 
