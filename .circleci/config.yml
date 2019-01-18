@@ -80,11 +80,11 @@ jobs:
             git push origin production ; 
             fi
       - run:
-          name: Deploy to production if branch production
+          name: Deploy production
           command: |
             if [ "$CIRCLE_BRANCH" == "production" ];
             then
-              cd deploy ;
+#              cd deploy ;
 #              ansible -i hosts  prod -m ping  -u ubuntu ;
 #              ansible-playbook -i hosts  deploy.yml -u ubuntu  ;
             python manage.py migrate;
