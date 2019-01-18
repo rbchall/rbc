@@ -73,11 +73,11 @@ jobs:
           command: |
             if [ "$CIRCLE_BRANCH" == "master" ];
             then
-            git config user.email "rbchall.official@gmail.com" ;
-            git config user.name "rbchall" ;
-            git checkout production ;
-            git rebase master ;
-            git push origin production ; 
+              git config user.email "rbchall.official@gmail.com" ;
+              git config user.name "rbchall" ;
+              git checkout production ;
+              git rebase master ;
+              git push origin production ; 
             fi
       - run:
           name: Deploy production
@@ -87,6 +87,6 @@ jobs:
 #              cd deploy ;
 #              ansible -i hosts  prod -m ping  -u ubuntu ;
 #              ansible-playbook -i hosts  deploy.yml -u ubuntu  ;
-            python manage.py migrate ;
-            sudo service supervisor restart ;
+              python manage.py migrate ;
+              sudo service supervisor restart ;
             fi
