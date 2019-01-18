@@ -20,7 +20,7 @@ jobs:
 #         command: |
 #            sudo chown -R circleci:circleci /usr/local/bin
 #            sudo chown -R circleci:circleci /usr/local/lib/python3.6/site-packages
-# Download and cache dependencies
+#       Download and cache dependencies
       - restore_cache:
           keys:
           - v1-dependencies-{{ checksum "requirements.txt" }}
@@ -70,14 +70,14 @@ jobs:
 #            
       - run:
         name: Merge master branch to prod
-         command: |
+          command: |
             if [ "$CIRCLE_BRANCH" == "master" ];
             then
-             git config user.email "rbchall.official@gmail.com" ;
-             git config user.name "rbchall" ;
-             git checkout production ;
-             git rebase master ;
-             git push origin production ; 
+            git config user.email "rbchall.official@gmail.com" ;
+            git config user.name "rbchall" ;
+            git checkout production ;
+            git rebase master ;
+            git push origin production ; 
             fi
       - run:
           name: Deploy to production if branch production
@@ -87,4 +87,5 @@ jobs:
 #              cd deploy ;
 #              ansible -i hosts  prod -m ping  -u ubuntu ;
 #              ansible-playbook -i hosts  deploy.yml -u ubuntu  ;
+                sudo service supervisor restart 
             fi
