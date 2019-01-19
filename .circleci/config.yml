@@ -9,7 +9,7 @@ jobs:
         - master
         - production
         - new
-    #working_directory: /srv/www/rbc
+    working_directory: /srv/www/rbc
     steps:
       - checkout
       - restore_cache:
@@ -21,8 +21,8 @@ jobs:
           name: install dependencies
           command: |
             #python3 -m venv venv
-            whoami
-            source ~/virtualenvs/rbc/bin/activate
+            #whoami
+            source /home/ubuntu/virtualenvs/rbc/bin/activate
             pip install -r requirements.txt
       - save_cache:
           paths:
@@ -36,7 +36,7 @@ jobs:
       - run:
           name: Simulate Django Migrations and Unit test
           command: |
-            source ~/virtualenvs/rbc/bin/activate
+            source /home/ubuntu/virtualenvs/rbc/bin/activate
             python manage.py migrate
             python manage.py test
 #      - store_artifacts:
@@ -64,7 +64,7 @@ jobs:
           name: Deploy Django
           command: |
             if [ "$CIRCLE_BRANCH" == "production" ];
-              source ~/virtualenvs/rbc/bin/activate
+              source /home/ubuntu/virtualenvs/rbc/bin/activate
               python manage.py migrate
             fi
 
