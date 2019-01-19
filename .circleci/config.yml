@@ -1,19 +1,24 @@
 version: 2
 jobs:
   build:
+    working_directory: /srv/www/rbc/
     docker:
       - image: circleci/python:3.6.4
+      - environment: 
+          PIPENV_VENV_IN_PROJECT: true
     branches:
       only:
         - circleci
         - master
         - production
         - new
-    #working_directory: /srv/www/rbc/
     steps:
       - checkout
+      #- run: sudo chown -R circleci:circleci /usr/local/bin
+      #- run: sudo chown -R circleci:circleci /usr/local/lib/python3.6/site-packages
       - restore_cache:
           keys:
+#          - deps9-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
           - v1-dependencies-{{ checksum "requirements.txt" }}
           # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
@@ -21,27 +26,35 @@ jobs:
           name: install dependencies
           command: |
             #python3 -m venv venv
-            whoami
+            #whoami
+            #sudo pip install pipenv
+            #pipenv install
             source /home/ubuntu/virtualenvs/rbc/bin/activate
             pip install -r requirements.txt
       - save_cache:
+          keys: 
+          - deps9-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
+          - v1-dependencies-{{ checksum "requirements.txt" }}
           paths:
-            /home/ubuntu/virtualenvs/rbc/
-          key: v1-dependencies-{{ checksum "requirements.txt" }}
+            - "/home/ubuntu/virtualenvs/rbc/"
+            - ".venv"
+            - "/usr/local/bin"
+            - "/usr/local/lib/python3.6/site-packages"
       # run tests!
       # this example uses Django's built-in test-runner
       # other common Python testing frameworks include pytest and nose
       # https://pytest.org
       # https://nose.readthedocs.io
       - run:
-          name: Simulate Django Migrations and Unit test
+          name: Deploy Django
           command: |
-            source /home/ubuntu/virtualenvs/rbc/bin/activate
-            python srv/www/rbc/manage.py migrate
-            python srv/www/rbc/manage.py test
-#      - store_artifacts:
-#          path: test-reports
-#          destination: test-reports
+            #            pipenv run "python manage.py test"
+            python manage.py test
+      - store_test_results:
+          path: test-results
+      - store_artifacts:
+          path: test-results
+          destination: tr1
       - run:
           name: Updating apt and install Ansible and pipenv
           command: |
