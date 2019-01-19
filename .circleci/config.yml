@@ -9,7 +9,7 @@ jobs:
         - master
         - production
         - new
-    working_directory: /srv/www/rbc/
+    working_directory: /srv/www/rbc
     steps:
       - checkout
       - restore_cache:
