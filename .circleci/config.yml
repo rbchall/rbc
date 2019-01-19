@@ -1,11 +1,11 @@
 version: 2
 jobs:
   build:
-    working_directory: /srv/www/rbc/
     docker:
       - image: circleci/python:3.6.4
       - environment: 
           PIPENV_VENV_IN_PROJECT: true
+    working_directory: /srv/www/rbc/          
     branches:
       only:
         - circleci
