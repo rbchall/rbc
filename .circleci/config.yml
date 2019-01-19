@@ -12,9 +12,6 @@ jobs:
     #working_directory: /srv/www/rbc
     steps:
       - checkout
-      - run:
-        name: user check
-        command : whoami
       - restore_cache:
           keys:
           - v1-dependencies-{{ checksum "requirements.txt" }}
@@ -24,6 +21,7 @@ jobs:
           name: install dependencies
           command: |
             #python3 -m venv venv
+            whoami
             source ~/virtualenvs/rbc/bin/activate
             pip install -r requirements.txt
       - save_cache:
