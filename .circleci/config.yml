@@ -3,8 +3,8 @@ jobs:
   build:
     docker:
       - image: circleci/python:3.6.4
-      - environment: 
-          PIPENV_VENV_IN_PROJECT: true
+#      - environment: 
+#          PIPENV_VENV_IN_PROJECT: true
     working_directory: /srv/www/rbc/          
     branches:
       only:
