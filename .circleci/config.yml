@@ -32,9 +32,10 @@ jobs:
             source /home/ubuntu/virtualenvs/rbc/bin/activate
             pip install -r requirements.txt
       - save_cache:
-          keys: 
+          #keys: 
           #- deps9-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
-          - v1-dependencies-{{ checksum "requirements.txt" }}
+          #- v1-dependencies-{{ checksum "requirements.txt" }}
+          key: v1-dependencies-{{ checksum "requirements.txt" }}
           paths:
             - "/home/ubuntu/virtualenvs/rbc/"
             - ".venv"
