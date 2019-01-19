@@ -3,72 +3,51 @@ jobs:
   build:
     docker:
       - image: circleci/python:3.6.4
-#        environment:
-#          PIPENV_VENV_IN_PROJECT: true
     branches:
       only:
         - circleci
         - master
         - production
         - new
-
     working_directory: /srv/www/rbc/
-    
     steps:
       - checkout
-#      - run: 
-#         name: Change ownership to circleci user
-#         command: |
-#            sudo chown -R circleci:circleci /usr/local/bin
-#            sudo chown -R circleci:circleci /usr/local/lib/python3.6/site-packages
-#       Download and cache dependencies
       - restore_cache:
           keys:
           - v1-dependencies-{{ checksum "requirements.txt" }}
           # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
-
       - run:
           name: install dependencies
           command: |
             #python3 -m venv venv
             source ~/virtualenvs/rbc/bin/activate
             pip install -r requirements.txt
-
       - save_cache:
           paths:
             ~/virtualenvs/rbc/
           key: v1-dependencies-{{ checksum "requirements.txt" }}
-        
       # run tests!
       # this example uses Django's built-in test-runner
       # other common Python testing frameworks include pytest and nose
       # https://pytest.org
       # https://nose.readthedocs.io
       - run:
-          name: run tests
+          name: Simulate Django Migrations and Unit test
           command: |
             source ~/virtualenvs/rbc/bin/activate
             python manage.py migrate
             python manage.py test
-
 #      - store_artifacts:
 #          path: test-reports
 #          destination: test-reports
-#      - run:
-#          name: Updating apt and install Ansible and pipenv
-#          command: |
-#            sudo apt-get update
+      - run:
+          name: Updating apt and install Ansible and pipenv
+          command: |
+            sudo apt-get update
 #            sudo pip install ansible
 #            sudo pip install pipenv
 #            pipenv install
-#      - run:
-#          name: Simulate Django Migrations and Unit test
-#          command: |
-#            
-#            pipenv run "python manage.py migrate"
-#            pipenv run "python manage.py test"
-            
       - run:
           name: Merge master branch to prod
           command: |
@@ -80,15 +59,20 @@ jobs:
               git rebase master ;
               git push origin production ; 
             fi
+      - run:
+          name: Deploy Django
+          command: |
+            if [ "$CIRCLE_BRANCH" == "production" ];
+              source ~/virtualenvs/rbc/bin/activate
+              python manage.py migrate
+            fi
+
 #      - run:
 #          name: Deploy production
 #          command: |
 #            if [ "$CIRCLE_BRANCH" == "production" ];
-#            python manage.py migrate ;
 #            then
 #              cd deploy ;
 #              ansible -i hosts  prod -m ping  -u ubuntu ;
 #              ansible-playbook -i hosts  deploy.yml -u ubuntu  ;
-#              python manage.py migrate ;
-#              sudo service supervisor restart ;
 #            fi
