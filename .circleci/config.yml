@@ -9,6 +9,10 @@ jobs:
         - master
         - production
         - new
+    steps:
+      -run:
+        name: user check
+        command : whoami
     working_directory: /srv/www/rbc
     steps:
       - checkout
