@@ -8,57 +8,28 @@ jobs:
         - production
         - new
 
-    working_directory: /srv/www/rbc/
+    working_directory: ~/rbc
     docker:
       - image: circleci/python:3.6.4
-#      - environment: 
-#          PIPENV_VENV_IN_PROJECT: true
-#     steps:
-#       - checkout
+        environment: 
+          PIPENV_VENV_IN_PROJECT: true
+    steps:
+      - checkout
 #       #- run: sudo chown -R circleci:circleci /usr/local/bin
 #       #- run: sudo chown -R circleci:circleci /usr/local/lib/python3.6/site-packages
-#       - restore_cache:
-#           keys:
-# #          - deps9-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
-#           - v1-dependencies-{{ checksum "requirements.txt" }}
-#           # fallback to using the latest cache if no exact match is found
-#           - v1-dependencies-
-#       - run:
-#           name: install dependencies
-#           command: |
-#             #python3 -m venv venv
-#             #whoami
-#             #sudo pip install pipenv
-#             #pipenv install
-#             #virtualenv --python=python3 ~/venv/rbc
-#             #source ~/venv/rbc/bin/activate
-#             source /home/ubuntu/virtualenvs/rbc/bin/activate
-#             pip install -r requirements.txt
-#       - save_cache:
-#           #keys: 
-#           #- deps9-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
-#           #- v1-dependencies-{{ checksum "requirements.txt" }}
-#           key: v1-dependencies-{{ checksum "requirements.txt" }}
-#           paths:
-# #            - "~/venv/rbc/"
-#             - "/home/ubuntu/virtualenvs/rbc/"
-#             - "/usr/local/bin"
-#             - "/usr/local/lib/python3.6/site-packages"
-#       # run tests!
-#       # this example uses Django's built-in test-runner
-#       # other common Python testing frameworks include pytest and nose
-#       # https://pytest.org
-#       # https://nose.readthedocs.io
-#       - run:
-#           name: Deploy Django
-#           command: |
-#             #            pipenv run "python manage.py test"
-#             python manage.py test
-#       - store_test_results:
-#           path: test-results
-#       - store_artifacts:
-#           path: test-results
-#           destination: tr1
+      - restore_cache:
+          key: deps1-{{ .Branch }}-{{ checksum "requirements.txt" }}
+      - run:
+          name : Installing Dependencies
+          command : |
+            sudo apt-get install libsasl2-dev python-dev libldap2-dev libssl-dev
+            virtualenv .env
+            source .env/bin/activate
+            pip install -r requirements.txt
+      - save_cache:
+          key: deps1-{{ .Branch }}-{{ checksum "requirements.txt" }}
+          paths:
+             - ".env"
 #       - run:
 #           name: Updating apt and install Ansible and pipenv
 #           command: |
@@ -66,24 +37,25 @@ jobs:
 # #            sudo pip install ansible
 # #            sudo pip install pipenv
 # #            pipenv install
-#       - run:
-#           name: Merge master branch to prod
-#           command: |
-#             if [ "$CIRCLE_BRANCH" == "master" ];
-#             then
-#               git config user.email "rbchall.official@gmail.com" ;
-#               git config user.name "rbchall" ;
-#               git checkout production ;
-#               git rebase master ;
-#               git push origin production ; 
-#             fi
-#       - run:
-#           name: Deploy Django
-#           command: |
-#             if [ "$CIRCLE_BRANCH" == "production" ];
-#               source /home/ubuntu/virtualenvs/rbc/bin/activate
-#               python srv/www/rbc/manage.py migrate
-#            fi
+      - run:
+          name: Simulate Django Migrations and Unit Test
+          command: |
+            sudo apt-get install libsasl2-dev python-dev libldap2-dev libssl-dev
+            virtualenv .env
+            source .env/bin/activate 
+            python manage.py migrate
+            python manage.py test
+      - run:
+          name: Merge master branch to prod
+          command: |
+            if [ "$CIRCLE_BRANCH" == "master" ];
+            then
+              git config user.email "rbchall.official@gmail.com" ;
+              git config user.name "rbchall" ;
+              git checkout production ;
+              git rebase master ;
+              git push origin production ; 
+            fi
 
 #      - run:
 #          name: Deploy production
@@ -94,3 +66,8 @@ jobs:
 #              ansible -i hosts  prod -m ping  -u ubuntu ;
 #              ansible-playbook -i hosts  deploy.yml -u ubuntu  ;
 #            fi
+      - store_test_results:
+          path: test-results
+      - store_artifacts:
+          path: test-results
+          destination: tr1
