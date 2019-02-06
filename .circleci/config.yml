@@ -54,7 +54,7 @@ jobs:
               git config user.name "rbchall" ;
               git checkout production ;
               git rebase master ;
-              git push origin production ; 
+              git push origin production ;
             fi
 
 #      - run:
@@ -71,3 +71,4 @@ jobs:
       - store_artifacts:
           path: test-results
           destination: tr1
+          
