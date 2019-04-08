@@ -8,6 +8,7 @@ from django.forms import ModelForm
 from multiselectfield import MultiSelectField
 from django.db.models.signals import post_save
 from Profile.models import create_profile
+from net.models import create_Netprofile
 from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
 from time import timezone
@@ -114,17 +115,18 @@ class RBCUserManager(BaseUserManager):
 ## ## custome usermodel
 class RBCUser(AbstractBaseUser):
     now = datetime.datetime.utcnow().replace(tzinfo=utc)
-    username = models.CharField(_('username'),max_length=50, blank=True, null=True, unique=True)
-    first_name = models.CharField(_('first_name'),max_length=50, blank=False, null=False)
-    middle_name = models.CharField(_('middle_name'),max_length=50, blank=True, null=True)
-    last_name = models.CharField(_('last_name'),max_length=50, blank=True, null=True)
-    year = models.IntegerField(_('year'),choices=YEAR_CHOICES, null=True,)
-    room_number = models.IntegerField(_('room_number'),choices=ROOM_NUMBER, null=True)
-    active = models.BooleanField(_('active'),default=False) # can login
-    staff = models.BooleanField(_('staff'),default=False) #staff non admin/super
-    admin = models.BooleanField(_('admin'),default=False) #admin/superuser
-    authenticated = models.BooleanField(_('authenticated'),default=False) # for authentication
-    date_joined=models.DateField(_('date_joined'),auto_now_add=True)
+    username = models.CharField(_('Username'),max_length=50, blank=True, null=True, unique=True)
+    first_name = models.CharField(_('First name'),max_length=50, blank=False, null=False)
+    middle_name = models.CharField(_('Middle name'),max_length=50, blank=True, null=True)
+    last_name = models.CharField(_('Last name'),max_length=50, blank=True, null=True)
+    year = models.IntegerField(_('Year'),choices=YEAR_CHOICES, null=True,)
+    room_number = models.IntegerField(_('Room number'),choices=ROOM_NUMBER, null=True)
+    active = models.BooleanField(_('Active'),default=False) # can login
+    staff = models.BooleanField(_('Staff'),default=False) #staff non admin/super
+    admin = models.BooleanField(_('Admin'),default=False) #admin/superuser
+    authenticated = models.BooleanField(_('Authenticated'),default=False) # for authentication
+    date_joined=models.DateField(_('Joined On'),auto_now=True)
+    Last_Updated=models.DateField(_('Updated On'),auto_now_add=True)
 
     USERNAME_FIELD = 'username'
     # email and password are required
@@ -190,3 +192,4 @@ class RBCUser(AbstractBaseUser):
         return self.authenticated
 
 post_save.connect(create_profile, sender=settings.AUTH_USER_MODEL)
+post_save.connect(create_Netprofile, sender=settings.AUTH_USER_MODEL)

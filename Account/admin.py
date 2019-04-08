@@ -62,6 +62,7 @@ class UserAdmin(BaseUserAdmin):
     search_fields = ['username', 'room_number', 'year']
     form = UserAdminChangeForm #edit form
     add_form = UserAdminCreationForm #add form
+    readonly_fields=('date_joined','Last_Updated')
 
     # The fields to be used in displaying the User model.
     # These override the definitions on the base UserAdmin
@@ -72,6 +73,7 @@ class UserAdmin(BaseUserAdmin):
         (None, {'fields': ('username', 'password')}),
         ('Personal info', {'fields': ('first_name','last_name','middle_name','year','room_number')}),
         ('Permissions', {'fields': ('admin','staff','active','authenticated')}),
+        ('Dates', {'fields':('date_joined','Last_Updated')}),
     )
     # add_fieldsets is not a standard ModelAdmin attribute. UserAdmin
     # overrides get_fieldsets to use this attribute when creating a user.

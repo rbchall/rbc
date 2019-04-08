@@ -22,7 +22,7 @@ from django.template.base import kwarg_re
 
 # @login_required
 class UserProfile(models.Model):
-    user = models.OneToOneField(settings.AUTH_USER_MODEL, related_name='UserDetails', on_delete=models.CASCADE)
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, related_name='MessDetails', on_delete=models.CASCADE)
     # room_number = models.ForeignKey('Account.RBCUser.room_number', on_delete=models.CASCADE)
     #username = models.ForeignKey(settings.AUTH_USER_MODEL,default=user, on_delete=models.CASCADE)
     veg = models.BooleanField(default=False)
@@ -32,6 +32,7 @@ class UserProfile(models.Model):
     veg_on_chicken = models.BooleanField(default=False)
     veg_on_mutton = models.BooleanField(default=False)
     fine = models.IntegerField(blank='', null='', default='0')
+    Updates_On = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.user.username
