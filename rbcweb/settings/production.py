@@ -88,10 +88,6 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-        #'NAME': 'sarbesh$RBC',
-        #'USER': 'sarbesh',
-        #'PASSWORD': 'Veyron@16.4',
-        #'HOST': 'sarbesh.mysql.pythonanywhere-services.com',
     }
 }
 
